@@ -62,10 +62,12 @@ public class ObjectManager
     }
     public HashSet<BattleEntityController> Armys { get; } = new HashSet<BattleEntityController>();
 
-    public BattleEntityController SpawnArmyBattleEntity(Define.BattleEntity _entity, int _level)
+    public BattleEntityController SpawnArmyBattleEntity(Define.BattleEntity _entity, int _level,Vector2 _position = new Vector2())
     {
         BattleEntityController battleEntityController = Managers.Resource.Instantiate($"{_entity.ToString()}", _parent: ArmyBattleEntityTrnas).GetOrAddComponent<BattleEntityController>();
         BattleEntity battleEntity = null;
+        BattleEntityStatus status = null;
+        BattleEntityData data = null;
         Dictionary<Define.BattleEntityState, State<BattleEntityController>> states = new Dictionary<BattleEntityState, State<BattleEntityController>>();
         switch (_entity)
         {
@@ -76,6 +78,10 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Zero.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Zero.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Zero.EndBattle());
+
+                data = Managers.Data.GetBattleEntityData((int)_entity, _level);
+                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime);
+                battleEntity = new BattleEntites.Zero(battleEntityController);
                 break;
 
             case Define.BattleEntity.One:
@@ -94,7 +100,7 @@ public class ObjectManager
         if(battleEntityController != null)
         {
             battleEntityController.entityType = BattleEntityType.Army;
-            battleEntityController.Init(battleEntity, states);
+            battleEntityController.Init(battleEntity, states, status);
             Armys.Add(battleEntityController);
             return battleEntityController;        
         }
@@ -102,46 +108,4 @@ public class ObjectManager
         Debug.Log("스폰을 실패하였습니다.");
         return null;
     }
-
-    public BattleEntityController SpawnEnemyBattleEntity(Define.BattleEntity _entity, int _level)
-    {
-        BattleEntityController battleEntityController = Managers.Resource.Instantiate($"{_entity.ToString()}", _parent: EnemyBattleEntityTrnas).GetOrAddComponent<BattleEntityController>();
-        BattleEntity battleEntity = null;
-        Dictionary<Define.BattleEntityState, State<BattleEntityController>> states = new Dictionary<BattleEntityState, State<BattleEntityController>>();
-        switch (_entity)
-        {
-            case Define.BattleEntity.Zero:
-                states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Zero.Idle());
-                states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Zero.Move());
-                states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Zero.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Zero.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Zero.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Zero.EndBattle());
-                break;
-
-            case Define.BattleEntity.One:
-
-                break;
-
-            case Define.BattleEntity.Two:
-
-                break;
-
-            case Define.BattleEntity.Three:
-
-                break;
-        }
-
-        if (battleEntityController != null)
-        {
-            battleEntityController.entityType = BattleEntityType.Enemy;
-            battleEntityController.Init(battleEntity, states);
-            Enemys.Add(battleEntityController);
-            return battleEntityController;
-        }
-
-        Debug.Log("스폰을 실패하였습니다.");
-        return null;
-    }
-
 }

@@ -11,7 +11,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
-
+                Debug.Log("Idle 들어옴");
             }
 
             public override void ExitState(BattleEntityController _controller)
@@ -21,7 +21,7 @@ namespace BattleEntityStates
 
             public override void UpdateState(BattleEntityController _controller)
             {
-
+                Debug.Log("Idle 업데이트중");
             }
         }
 

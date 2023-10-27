@@ -6,21 +6,23 @@ using static Define;
 public class BattleEntityController : EntityController, IAttackable, IHittable
 {
     public BattleEntity entity;
-    public BattleEntityStatus status;
     public StateMachine<BattleEntityController> stateMachine;
+    public BattleEntityStatus status;
     public Dictionary<BattleEntityState, State<BattleEntityController>> states;
-
     public BattleEntityType entityType;
+    public BattleEntityState state = BattleEntityState.Idle;
 
-    private bool isInit = false;
+    private bool init = false;
     private bool isDead;
 
-    public void Init(BattleEntity _entity, Dictionary<BattleEntityState, State<BattleEntityController>> _states)
+    public void Init(BattleEntity _entity, Dictionary<BattleEntityState, State<BattleEntityController>> _states, BattleEntityStatus _status)
     {
-        if (isInit) return;
+        if (init) return;
         entity = _entity;
         states = _states;
+        status = _status;
         stateMachine = new StateMachine<BattleEntityController>(this, states[BattleEntityState.Idle]);
+        init = true;
         isDead = false;
     }
 
@@ -45,9 +47,23 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         Managers.Resource.Destroy(gameObject);
     }
 
+    public void ChangeState(BattleEntityState _nextState , bool _isChangeSameState = false)
+    {
+        if (!init) return;
+        if (state == _nextState)
+        {
+            if (_isChangeSameState)
+                stateMachine.ChangeState(states[_nextState]);
+            return;
+        }
+        state = _nextState;
+        stateMachine.ChangeState(states[_nextState]);
+    }
+
     public void Update()
     {
-        
+        if (!init) return;
+        stateMachine.UpdateState();
     }
 }
 

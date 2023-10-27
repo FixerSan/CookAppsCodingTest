@@ -6,7 +6,6 @@ using static Define;
 public class GameManager : Singleton<GameManager>
 {
     public GameState state;
-    public PlayerData data;
 
     public void Awake()
     {
@@ -23,7 +22,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
-        Managers.Data.SavePlayerData(Managers.Data.userData);
+        Managers.Data.SavePlayerData(Managers.Data.playerData);
     }
 
     public void OnApplicationPause(bool pause)

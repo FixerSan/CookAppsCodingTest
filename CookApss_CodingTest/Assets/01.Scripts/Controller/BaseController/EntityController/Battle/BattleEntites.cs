@@ -5,8 +5,6 @@ using UnityEngine;
 public abstract class BattleEntity : IAttackable, IHittable
 {
     protected BattleEntityController controller;
-    //데이터는 여기에
-
     public abstract void Attack();
     public abstract void Hit();
     public abstract void GetDamage();
@@ -14,6 +12,29 @@ public abstract class BattleEntity : IAttackable, IHittable
 
 namespace BattleEntites
 {
+    public class Zero : BattleEntity
+    {
+        public override void Attack()
+        {
+
+        }
+
+        public override void GetDamage()
+        {
+
+        }
+
+        public override void Hit()
+        {
+
+        }
+
+        public Zero(BattleEntityController _controller)
+        {
+            controller = _controller;
+        }
+    }
+
     public class One : BattleEntity
     {
         public override void Attack()

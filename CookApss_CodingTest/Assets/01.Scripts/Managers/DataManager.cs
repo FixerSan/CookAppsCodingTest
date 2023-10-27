@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class DataManager
 {
-    public PlayerData userData;
+    public PlayerData playerData;
 
-    public Dictionary<int, Dictionary<int,BattleEntityStatusData>> battleEntityStatusDatas;
+    public Dictionary<int, Dictionary<int,BattleEntityData>> battleEntityStatusDatas;
     public Dictionary<int, DialogData> dialogDatas;
     public readonly string PLAYERSAVEDATA_PATH;
 
@@ -21,6 +21,13 @@ public class DataManager
         return null;
     }
 
+    public BattleEntityData GetBattleEntityData(int _UID, int _level)
+    {
+        if (battleEntityStatusDatas.TryGetValue(_UID, out Dictionary<int, BattleEntityData> datas)) if (datas.TryGetValue(_level, out BattleEntityData data)) return data;
+        return null;
+
+    }
+
     public void LoadPreData()
     {
         LoadPlayerData(Define.userUID);
@@ -29,7 +36,7 @@ public class DataManager
 
     private PlayerData LoadPlayerData(int _UID)
     {
-        if(userData == null)
+        if(playerData == null)
         {
             TextAsset textAsset = Managers.Resource.Load<TextAsset>("PlayerSaveData");
             PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(textAsset.text);
@@ -45,19 +52,19 @@ public class DataManager
                 entityDatas.Add(entityData);
             }
 
-            userData = new PlayerData(saveData.UID, saveData.name, entityDatas);
+            playerData = new PlayerData(saveData.UID, saveData.name, saveData.knightageLevel, entityDatas);
         }
-        return userData;
+        return playerData;
     }
 
     public void LoadBattleEntityStatusData()
     {
-        TextAsset textAsset = Managers.Resource.Load<TextAsset>("BattleEntityStatusData");
-        BattleEntityStatusDatas _battleEntityStatusDatas = JsonUtility.FromJson<BattleEntityStatusDatas>(textAsset.text);
+        TextAsset textAsset = Managers.Resource.Load<TextAsset>("BattleEntityData");
+        BattleEntityDatas _battleEntityStatusDatas = JsonUtility.FromJson<BattleEntityDatas>(textAsset.text);
 
         for (int i = 0; i < Define.currentBattleEntityCount; i++)
         {
-            battleEntityStatusDatas.Add(i, new Dictionary<int, BattleEntityStatusData>());
+            battleEntityStatusDatas.Add(i, new Dictionary<int, BattleEntityData>());
         }
 
         for (int i = 0; i < Define.currentBattleEntityMaxLevel; i++)
@@ -90,7 +97,7 @@ public class DataManager
             hasEntityLevel += (_playerData.hasEntites[i].level + ",");
         }
 
-        PlayerSaveData saveData = new PlayerSaveData(_playerData.UID,_playerData.name, hasEntityUIDs, hasEntityLevel);
+        PlayerSaveData saveData = new PlayerSaveData(_playerData.UID, _playerData.name, _playerData.knightageLevel, hasEntityUIDs, hasEntityLevel);
         string saveDataJson = JsonUtility.ToJson(saveData);
 
         File.WriteAllText(PLAYERSAVEDATA_PATH, saveDataJson);
@@ -98,9 +105,9 @@ public class DataManager
 
     public DataManager()
     {
-        userData = null;
+        playerData = null;
         dialogDatas = new Dictionary<int, DialogData> ();
-        battleEntityStatusDatas = new Dictionary<int, Dictionary<int, BattleEntityStatusData>>();
+        battleEntityStatusDatas = new Dictionary<int, Dictionary<int, BattleEntityData>>();
         PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/04.Datas/", "PlayerSaveData.txt");
     }
 }
@@ -117,12 +124,14 @@ public class PlayerData : Data
 {
     public int UID;
     public string name;
+    public int knightageLevel;
     public List<BaseBattleEntityData> hasEntites;
 
-    public PlayerData(int _UID, string _name, List<BaseBattleEntityData> _hasEntites)
+    public PlayerData(int _UID, string _name, int _knightageLevel, List<BaseBattleEntityData> _hasEntites)
     {
         UID = _UID;
         name = _name;
+        knightageLevel = _knightageLevel;
         hasEntites = _hasEntites;
     }
 }
@@ -134,11 +143,13 @@ public class PlayerSaveData : Data
     public string name;
     public string hasEntityUID;
     public string hasEntityLevel;
+    public int knightageLevel;
 
-    public PlayerSaveData(int _UID, string _name, string _hasEntityUID, string _hasEntityLevel)
+    public PlayerSaveData(int _UID, string _name, int _knightageLevel, string _hasEntityUID, string _hasEntityLevel)
     {
         UID = _UID;
         name = _name;
+        knightageLevel = _knightageLevel;
         hasEntityUID = _hasEntityUID;
         hasEntityLevel = _hasEntityLevel;
     }
@@ -173,19 +184,20 @@ public class BaseBattleEntityData
 }
 
 [System.Serializable]
-public class BattleEntityStatusData
+public class BattleEntityData
 {
     public int UID;
+    public string name;
     public int level;
     public int maxHP;
     public int attackForce;
     public float skillCooltime;
 }
 
-public class BattleEntityStatusDatas
+public class BattleEntityDatas
 {
-    public BattleEntityStatusData[] zero;
-    public BattleEntityStatusData[] one;
-    public BattleEntityStatusData[] two;
-    public BattleEntityStatusData[] three;
+    public BattleEntityData[] zero;
+    public BattleEntityData[] one;
+    public BattleEntityData[] two;
+    public BattleEntityData[] three;
 }
