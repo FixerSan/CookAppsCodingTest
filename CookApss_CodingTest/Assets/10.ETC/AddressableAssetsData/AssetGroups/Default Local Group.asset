@@ -20,7 +20,13 @@ MonoBehaviour:
   - m_GUID: 9701fdb82cd9d3a4e975e8a8856f24b7
     m_Address: Main Camera.GameObject
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 24a5226e1d3eee248830457ec16e2353
+    m_Address: PlayerSaveData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0a3ce9892cecf864db1d8ab456c0ed3d, type: 2}
   m_SchemaSet:
