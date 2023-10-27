@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Define 
 {
+    public static readonly int currentBattleEntityCount = 4;
+    public static readonly int currentBattleEntityMaxLevel = 5;
+    public static readonly int userUID = 0;
+
     public enum GameState
     {
         BattleBefore,

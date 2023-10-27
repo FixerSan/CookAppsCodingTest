@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: c890c45157ddf6e4bb0bdb92e80f3160
+    m_Address: BattleEntityStatusData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0a3ce9892cecf864db1d8ab456c0ed3d, type: 2}
   m_SchemaSet:

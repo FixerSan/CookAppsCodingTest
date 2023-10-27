@@ -18,12 +18,12 @@ public class GameManager : Singleton<GameManager>
     
     public void StartGame()
     {
-        data = Managers.Data.Get<PlayerData>(0);
+        Managers.Data.LoadPreData();
     }
 
     public void SaveGame()
     {
-        Managers.Data.SavePlayerData(data);
+        Managers.Data.SavePlayerData(Managers.Data.userData);
     }
 
     public void OnApplicationPause(bool pause)
