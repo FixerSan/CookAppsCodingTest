@@ -28,7 +28,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Preload
   - m_GUID: c890c45157ddf6e4bb0bdb92e80f3160
-    m_Address: BattleEntityStatusData.Data
+    m_Address: BattleEntityData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 422a3a16874f4f14eb1023a2ed9ad92a
+    m_Address: Zero.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
