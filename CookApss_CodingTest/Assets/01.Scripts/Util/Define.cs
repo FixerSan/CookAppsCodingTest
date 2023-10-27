@@ -4,6 +4,31 @@ using UnityEngine;
 
 public class Define 
 {
+    public enum GameState
+    {
+        BattleBefore,
+        BattleProgress,
+        BattleAfter
+    }
+    
+    public enum BattleEntity
+    {
+        Zero = 0,
+        One = 1,
+        Two = 2,
+        Three = 3
+    }
+
+    public enum BattleEntityType
+    {
+        Army, Enemy
+    }
+
+    public enum BattleEntityState
+    {
+        Idle, Move, Attack, SkillCast, Die, EndBattle
+    }
+
     public enum VoidEventType
     {
 
