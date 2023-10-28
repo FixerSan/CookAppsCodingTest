@@ -11,7 +11,10 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     public Dictionary<BattleEntityState, State<BattleEntityController>> states;
     public BattleEntityType entityType;
     public BattleEntityState state = BattleEntityState.Idle;
+    public Rigidbody2D rb;
+    public Transform target;
 
+    private Transform hpBarTrans;
     private bool init = false;
     private bool isDead;
 
@@ -21,9 +24,14 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         entity = _entity;
         states = _states;
         status = _status;
+        rb = gameObject.GetOrAddComponent<Rigidbody2D>();
+        isDead = false;
+        hpBarTrans = Util.FindChild<Transform>(gameObject, "HpBarTrans", true);
+        UIHPBar hpBar =  Managers.Resource.Instantiate("UIHPbar", _pooling:true).GetOrAddComponent<UIHPBar>();
+
+        hpBar.Init(this);
         stateMachine = new StateMachine<BattleEntityController>(this, states[BattleEntityState.Idle]);
         init = true;
-        isDead = false;
     }
 
     public void Attack()
@@ -58,6 +66,11 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         }
         state = _nextState;
         stateMachine.ChangeState(states[_nextState]);
+    }
+
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
     }
 
     public void Update()

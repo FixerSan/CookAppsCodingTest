@@ -10,13 +10,15 @@ public class BattleEntityStatus
     public int attackForce;
     public float skillCooltime;
     public float currentSkillCooltime;
+    public int moveSpeed;
 
-    public BattleEntityStatus(int _maxHP, int _currentHP, int _attackForce,  float _skillCooltime, float _currentSkillCooltime)
+    public BattleEntityStatus(int _maxHP, int _currentHP, int _attackForce,  float _skillCooltime, float _currentSkillCooltime, int _moveSpeed)
     {
         maxHP = _maxHP;
         currentHP = _currentHP; 
         attackForce = _attackForce;
         skillCooltime = _skillCooltime;
         currentSkillCooltime = _currentSkillCooltime;
+        moveSpeed = _moveSpeed;
     }
 }

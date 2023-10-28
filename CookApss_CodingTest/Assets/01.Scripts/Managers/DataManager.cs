@@ -74,13 +74,11 @@ public class DataManager
         for (int i = 0; i < Define.currentBattleEntityMaxLevel; i++)
         {
             battleEntityStatusDatas[0].Add(_battleEntityStatusDatas.zero[i].level, _battleEntityStatusDatas.zero[i]);
-            Debug.Log("데이터가 로드 되었습니다.");
             battleEntityStatusDatas[1].Add(_battleEntityStatusDatas.one[i].level, _battleEntityStatusDatas.one[i]);
-            Debug.Log("데이터가 로드 되었습니다.");
             battleEntityStatusDatas[2].Add(_battleEntityStatusDatas.two[i].level, _battleEntityStatusDatas.two[i]);
-            Debug.Log("데이터가 로드 되었습니다.");
             battleEntityStatusDatas[3].Add(_battleEntityStatusDatas.three[i].level, _battleEntityStatusDatas.three[i]);
-            Debug.Log("데이터가 로드 되었습니다.");
+            battleEntityStatusDatas[4].Add(_battleEntityStatusDatas.four[i].level, _battleEntityStatusDatas.four[i]);
+            battleEntityStatusDatas[5].Add(_battleEntityStatusDatas.five[i].level, _battleEntityStatusDatas.five[i]);
         }
     }
 
@@ -221,6 +219,7 @@ public class BattleEntityData : Data
     public int maxHP;
     public int attackForce;
     public float skillCooltime;
+    public int moveSpeed;
 }
 
 public class BattleEntityDatas : Data
@@ -229,4 +228,6 @@ public class BattleEntityDatas : Data
     public BattleEntityData[] one;
     public BattleEntityData[] two;
     public BattleEntityData[] three;
+    public BattleEntityData[] four;
+    public BattleEntityData[] five;
 }

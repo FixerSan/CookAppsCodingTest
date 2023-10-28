@@ -5,35 +5,40 @@
   "level": 1,
   "maxHP": 100,
   "attackForce": 50,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 0,
   "level": 2,
   "maxHP": 110,
   "attackForce": 55,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 0,
   "level": 3,
   "maxHP": 120,
   "attackForce": 60,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 0,
   "level": 4,
   "maxHP": 130,
   "attackForce": 65,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 0,
   "level": 5,
   "maxHP": 140,
   "attackForce": 70,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  }
 ],
 "one":[
@@ -42,35 +47,40 @@
   "level": 1,
   "maxHP": 100,
   "attackForce": 50,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 1,
   "level": 2,
   "maxHP": 110,
   "attackForce": 55,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 1,
   "level": 3,
   "maxHP": 120,
   "attackForce": 60,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 1,
   "level": 4,
   "maxHP": 130,
   "attackForce": 65,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 1,
   "level": 5,
   "maxHP": 140,
   "attackForce": 70,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  }
 ],
 "two":[
@@ -79,35 +89,40 @@
   "level": 1,
   "maxHP": 100,
   "attackForce": 50,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 2,
   "level": 2,
   "maxHP": 110,
   "attackForce": 55,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 2,
   "level": 3,
   "maxHP": 120,
   "attackForce": 60,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 2,
   "level": 4,
   "maxHP": 130,
   "attackForce": 65,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 2,
   "level": 5,
   "maxHP": 140,
   "attackForce": 70,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  }
 ],
 "three":[
@@ -116,35 +131,124 @@
   "level": 1,
   "maxHP": 100,
   "attackForce": 50,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 3,
   "level": 2,
   "maxHP": 110,
   "attackForce": 55,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 3,
   "level": 3,
   "maxHP": 120,
   "attackForce": 60,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 3,
   "level": 4,
   "maxHP": 130,
   "attackForce": 65,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
  },
  {
   "UID": 3,
   "level": 5,
   "maxHP": 140,
   "attackForce": 70,
-  "skillCooltime": 5
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ }
+],
+"four":[
+ {
+  "UID": 4,
+  "level": 1,
+  "maxHP": 100,
+  "attackForce": 50,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 4,
+  "level": 2,
+  "maxHP": 110,
+  "attackForce": 55,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 4,
+  "level": 3,
+  "maxHP": 120,
+  "attackForce": 60,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 4,
+  "level": 4,
+  "maxHP": 130,
+  "attackForce": 65,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 4,
+  "level": 5,
+  "maxHP": 140,
+  "attackForce": 70,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ }
+],
+"five":[
+ {
+  "UID": 5,
+  "level": 1,
+  "maxHP": 100,
+  "attackForce": 50,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 5,
+  "level": 2,
+  "maxHP": 110,
+  "attackForce": 55,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 5,
+  "level": 3,
+  "maxHP": 120,
+  "attackForce": 60,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 5,
+  "level": 4,
+  "maxHP": 130,
+  "attackForce": 65,
+  "skillCooltime": 5,
+  "moveSpeed": 5
+ },
+ {
+  "UID": 5,
+  "level": 5,
+  "maxHP": 140,
+  "attackForce": 70,
+  "skillCooltime": 5,
+  "moveSpeed": 5
  }
 ]
 }

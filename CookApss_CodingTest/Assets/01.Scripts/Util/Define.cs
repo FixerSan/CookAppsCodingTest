@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Define 
 {
-    public static readonly int currentBattleEntityCount = 4;
+    public static readonly int currentBattleEntityCount = 6;
     public static readonly int currentBattleEntityMaxLevel = 5;
     public static readonly int userUID = 0;
 
@@ -20,7 +20,9 @@ public class Define
         Zero = 0,
         One = 1,
         Two = 2,
-        Three = 3
+        Three = 3,
+        Four = 4,
+        Five = 5
     }
 
     public enum BattleEntityType
@@ -30,7 +32,7 @@ public class Define
 
     public enum BattleEntityState
     {
-        Idle, Move, Attack, SkillCast, Die, EndBattle
+        Idle, Move, Follow, Attack, SkillCast, Die, EndBattle
     }
 
     public enum MainSpecialty

@@ -67,6 +67,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 8bbc662c7289f794baaf024c8ab4dca1
+    m_Address: Five.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 38cc5f8db1339c44987eb78d69a4b47f
+    m_Address: Four.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 8ebe6dfbd228fb7499a42bf58cab8935
+    m_Address: One.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: a54ca7bd07f77c14ba5ee711e70208e3
+    m_Address: Three.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: ad1b1b07cc90b9e469ab95aa1f866793
+    m_Address: Two.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 95392e926769254429e55fbec7f79ac0
+    m_Address: UIHPbar.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0a3ce9892cecf864db1d8ab456c0ed3d, type: 2}
   m_SchemaSet:
