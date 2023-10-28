@@ -9,6 +9,8 @@ public class TestController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
-            Managers.Object.SpawnArmyBattleEntity((Define.BattleEntity)Managers.Data.playerData.hasEntites[0].UID, Managers.Data.playerData.hasEntites[0].level);
+            Managers.Scene.LoadScene(Define.Scene.Stage);
+        if (Input.GetKeyDown(KeyCode.U))
+            Managers.UI.ShowPopupUI<UIPopup_BattleBefore>("UIBattleBefore");
     }
 }

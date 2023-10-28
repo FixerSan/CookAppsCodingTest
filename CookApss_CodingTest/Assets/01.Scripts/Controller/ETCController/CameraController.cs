@@ -44,6 +44,8 @@ public class CameraController : MonoBehaviour
     {
         if (Managers.Screen.CameraController != this)
             Managers.Resource.Destroy(gameObject);
+        else
+            Managers.Screen.SetCamera(this);
     }
 
     public void SetTarget(Transform _target)

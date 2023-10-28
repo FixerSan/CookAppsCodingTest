@@ -24,6 +24,11 @@ public class ScreenManager
         }
     }
 
+
+    public void SetCamera(CameraController _cameraController)
+    {
+        cameraController = _cameraController;
+    }
     // 카메라 타겟 설정
     public void SetCameraTarget(Transform _target)
     {

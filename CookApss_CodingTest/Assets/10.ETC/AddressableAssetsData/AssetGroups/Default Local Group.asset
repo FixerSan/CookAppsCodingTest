@@ -37,6 +37,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 0231583b89ce48342afee71ce8bb698a
+    m_Address: Slot_CanUseBattleEntity.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: d4a8a1f754915ba49a7516390dbcf84c
+    m_Address: KnightageData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 91ba554bd2514fe4e92ac70911d552b2
+    m_Address: UIPopup_BattleBefore.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 1302440fec8f79248a35f1cf3f45b5bd
+    m_Address: Slot_UseBattleEntity.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 33728f5a436af274285e9a372d7385da
+    m_Address: UIScene_Main.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 675dad35bb046e54bad5b57b244c8bfd
+    m_Address: UIPopup_WorldMap_ChapterOne.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0a3ce9892cecf864db1d8ab456c0ed3d, type: 2}
   m_SchemaSet:
