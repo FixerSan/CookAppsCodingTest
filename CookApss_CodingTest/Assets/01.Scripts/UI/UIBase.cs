@@ -29,6 +29,7 @@ public abstract class UIBase : MonoBehaviour
 
     protected void Bind<T>(Type _type) where T : Object
     {
+        if (objectDictionary.ContainsKey(typeof(T))) return;
         string[] names = Enum.GetNames(_type);
         Object[] objects = new Object[names.Length];
         objectDictionary.Add(typeof(T), objects);

@@ -1,14 +1,15 @@
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class DataManager
 {
     public PlayerData playerData;
 
     public Dictionary<int, Dictionary<int,BattleEntityData>> battleEntityStatusDatas;
+    public Dictionary<int, KnightageData> knightageDatas;
     public Dictionary<int, DialogData> dialogDatas;
     public readonly string PLAYERSAVEDATA_PATH;
 
@@ -28,10 +29,13 @@ public class DataManager
 
     }
 
-    public void LoadPreData()
+    public void LoadPreData(Action _callback)
     {
         LoadPlayerData(Define.userUID);
         LoadBattleEntityStatusData();
+
+        //LoadKnightageData();
+        _callback?.Invoke();
     }
 
     private PlayerData LoadPlayerData(int _UID)
@@ -80,6 +84,17 @@ public class DataManager
         }
     }
 
+    //public void LoadKnightageData()
+    //{
+    //    TextAsset textAsset = Managers.Resource.Load<TextAsset>("BattleEntityData");
+    //    KnightageDatas _battleEntityStatusDatas = JsonUtility.FromJson<KnightageDatas>(textAsset.text);
+
+    //    for (int i = 0; i < _battleEntityStatusDatas.knightageDatas.Length; i++)
+    //    {
+    //        knightageDatas.Add(_battleEntityStatusDatas.knightageDatas[i].level, _battleEntityStatusDatas.knightageDatas[i]);
+    //    }
+    //}
+
     public void SavePlayerData(PlayerData _playerData)
     {
         string hasEntityUIDs = string.Empty;
@@ -108,6 +123,7 @@ public class DataManager
         playerData = null;
         dialogDatas = new Dictionary<int, DialogData> ();
         battleEntityStatusDatas = new Dictionary<int, Dictionary<int, BattleEntityData>>();
+        knightageDatas = new Dictionary<int,  KnightageData>();
         PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/04.Datas/", "PlayerSaveData.txt");
     }
 }
@@ -155,6 +171,19 @@ public class PlayerSaveData : Data
     }
 }
 
+[System.Serializable]
+public class KnightageData
+{
+    public int level;
+    public int maxBattleEntityCount;
+}
+
+[System.Serializable]
+public class KnightageDatas
+{
+    public KnightageData[] knightageDatas;
+}
+
 
 [System.Serializable]
 public class DialogData : Data
@@ -171,7 +200,7 @@ public class DialogData : Data
 }
 
 [System.Serializable]
-public class BaseBattleEntityData
+public class BaseBattleEntityData : Data
 {
     public int UID;
     public int level;
@@ -184,7 +213,7 @@ public class BaseBattleEntityData
 }
 
 [System.Serializable]
-public class BattleEntityData
+public class BattleEntityData : Data
 {
     public int UID;
     public string name;
@@ -194,7 +223,7 @@ public class BattleEntityData
     public float skillCooltime;
 }
 
-public class BattleEntityDatas
+public class BattleEntityDatas : Data
 {
     public BattleEntityData[] zero;
     public BattleEntityData[] one;

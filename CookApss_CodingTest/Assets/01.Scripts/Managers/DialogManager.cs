@@ -7,14 +7,14 @@ public class DialogManager
 {
     public Action callback;
 
-    private UIDialogSpeaker speaker;    // 다이얼로그 스피커 선언
-    public UIDialogSpeaker Speaker      // 다이얼로그 스피커 프로퍼티 선언
+    private UIPopup_DialogSpeaker speaker;    // 다이얼로그 스피커 선언
+    public UIPopup_DialogSpeaker Speaker      // 다이얼로그 스피커 프로퍼티 선언
     {
         get
         {
             if(speaker == null)
             {
-                speaker = Managers.UI.ShowPopupUI<UIDialogSpeaker>("UIPopup_DialogSpeaker", true);
+                speaker = Managers.UI.ShowPopupUI<UIPopup_DialogSpeaker>("UIPopup_DialogSpeaker", true);
                 speaker.Init();
             }
             return speaker;

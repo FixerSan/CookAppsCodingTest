@@ -6,7 +6,7 @@ using static Define;
 using System;
 using UnityEditor;
 
-public class UIDialogSpeaker : UIPopup
+public class UIPopup_DialogSpeaker : UIPopup
 {
     private float typingSpeed;
     private bool isTyping;

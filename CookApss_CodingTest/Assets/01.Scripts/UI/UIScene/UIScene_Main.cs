@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIBattleBefore : UIPopup
+public class UIScene_Main : UIScene
 {
     public override bool Init()
     {
@@ -10,24 +10,14 @@ public class UIBattleBefore : UIPopup
             return false;
 
         BindButton(typeof(Buttons));
-        BindImage(typeof(Images));
-        BindText(typeof(Texts));
+        BindEvent(GetButton((int)Buttons.Button_Stage).gameObject, () => { Managers.UI.ShowPopupUI<UIPopup_WorldMap_ChapterOne>(); });
+
 
         return true;
     }
 
     private enum Buttons
     {
-
-    }
-    
-    private enum Images
-    {
-
-    }
-
-    private enum Texts
-    {
-
+        Button_Stage
     }
 }

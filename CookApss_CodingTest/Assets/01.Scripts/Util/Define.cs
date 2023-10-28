@@ -33,9 +33,18 @@ public class Define
         Idle, Move, Attack, SkillCast, Die, EndBattle
     }
 
-    public enum VoidEventType
+    public enum MainSpecialty
     {
 
+    }
+    public enum SubSpecialty
+    {
+
+    }
+
+    public enum VoidEventType
+    {
+        OnChangeBattleInfo
     }
 
     public enum IntEventType
@@ -63,6 +72,6 @@ public class Define
 
     public enum Scene
     {
-        Main
+        Main, Stage
     }
 }
