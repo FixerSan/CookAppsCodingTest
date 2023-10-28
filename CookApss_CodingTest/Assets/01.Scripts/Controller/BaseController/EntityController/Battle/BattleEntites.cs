@@ -6,8 +6,8 @@ public abstract class BattleEntity : IAttackable, IHittable
 {
     protected BattleEntityController controller;
     public abstract void Attack();
-    public abstract void Hit();
-    public abstract void GetDamage();
+    public abstract void Hit(int _damage);
+    public abstract void GetDamage(int _damage);
 }
 
 namespace BattleEntites
@@ -19,12 +19,12 @@ namespace BattleEntites
 
         }
 
-        public override void GetDamage()
+        public override void GetDamage(int _damage)
         {
 
         }
 
-        public override void Hit()
+        public override void Hit(int _damage)
         {
 
         }
@@ -42,12 +42,12 @@ namespace BattleEntites
 
         }
 
-        public override void GetDamage()
+        public override void GetDamage(int _damage)
         {
 
         }
 
-        public override void Hit()
+        public override void Hit(int _damage)
         {
 
         }

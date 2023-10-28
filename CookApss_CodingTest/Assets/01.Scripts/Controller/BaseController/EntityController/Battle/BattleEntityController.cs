@@ -31,14 +31,14 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         entity.Attack();
     }
 
-    public void GetDamage()
+    public void GetDamage(int _damage)
     {
-        entity.GetDamage();
+        entity.GetDamage(_damage);
     }
 
-    public void Hit()
+    public void Hit(int _damage)
     {
-        entity.Hit();
+        entity.Hit(_damage);
     }
 
     public void Die()

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IHittable
 {
-    public abstract void Hit();
-    public abstract void GetDamage();
+    public abstract void Hit(int _damage);
+    public abstract void GetDamage(int _damage);
 }
