@@ -9,7 +9,12 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
         if(!base.Init()) return false;
 
         BindButton(typeof(Buttons));
-        BindEvent(GetButton((int)Buttons.Button_StageOne_One).gameObject, () => { Debug.Log("1 다시 1 스테이지 선택");   Managers.UI.ShowPopupUI<UIPopup_BattleBefore>(); });
+        BindEvent(GetButton((int)Buttons.Button_StageOne_One).gameObject, () => 
+        {
+
+            Managers.Game.battleInfo.SetStageData(1001);
+            Managers.UI.ShowPopupUI<UIPopup_BattleBefore>(); 
+        });
         BindEvent(GetButton((int)Buttons.Button_ClosePopup).gameObject, () => { Managers.UI.ClosePopupUI(this); });
 
         return true;

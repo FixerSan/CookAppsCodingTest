@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 5547045733633870748}
   - component: {fileID: 5547045733633870723}
   m_Layer: 5
-  m_Name: Text_BattleForce
+  m_Name: Text_EnemyBattleForce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 5547045733911075636}
   - component: {fileID: 2754451045683558234}
   m_Layer: 5
-  m_Name: Image_BattleEntitySpace_front
+  m_Name: Image_ArmyBattleEntitySpace_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,7 +807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200.00006, y: -0.000015258789}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 160, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5547045733911075637
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 5547045733965301726}
   - component: {fileID: 5547045733965301725}
   m_Layer: 5
-  m_Name: Text_BattleForce
+  m_Name: Text_ArmyBattleForce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 5547045733977416042}
   - component: {fileID: 5547045733977416041}
   m_Layer: 5
-  m_Name: Text_CanSpawnEntityCount
+  m_Name: Text_CanSpawnEnemyEntityCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1238,7 @@ GameObject:
   - component: {fileID: 5547045734146384985}
   - component: {fileID: 5547045734146384984}
   m_Layer: 5
-  m_Name: Panel_BattleInformation
+  m_Name: Panel_ArmyBattleInformation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1356,7 +1356,7 @@ GameObject:
   - component: {fileID: 5547045734280398893}
   - component: {fileID: 5301861402757841301}
   m_Layer: 5
-  m_Name: Image_BattleEntitySpace_Rear
+  m_Name: Image_ArmyBattleEntitySpace_Rear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1536,7 +1536,7 @@ GameObject:
   - component: {fileID: 5547045734675855916}
   - component: {fileID: 5249664209756316616}
   m_Layer: 5
-  m_Name: Image_BattleEntitySpace_Rear
+  m_Name: Image_EnemyBattleEntitySpace_Rear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1559,7 +1559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 160, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5547045734675855917
@@ -1754,7 +1754,7 @@ GameObject:
   - component: {fileID: 5547045734739404107}
   - component: {fileID: 3570199514964150809}
   m_Layer: 5
-  m_Name: Image_BattleEntitySpace_front
+  m_Name: Image_EnemyBattleEntitySpace_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1777,7 +1777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200.00006, y: -0.000015258789}
+  m_AnchoredPosition: {x: -200, y: 0}
   m_SizeDelta: {x: 160, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5547045734739404100
@@ -2156,7 +2156,7 @@ GameObject:
   - component: {fileID: 5547045735399895778}
   - component: {fileID: 6411845432820316299}
   m_Layer: 5
-  m_Name: Image_BattleEntitySpace_Center
+  m_Name: Image_ArmyBattleEntitySpace_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2375,7 +2375,7 @@ GameObject:
   - component: {fileID: 5547045735537976512}
   - component: {fileID: 6439695450396394284}
   m_Layer: 5
-  m_Name: Image_BattleEntitySpace_Center
+  m_Name: Image_EnemyBattleEntitySpace_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2581,7 +2581,7 @@ GameObject:
   - component: {fileID: 5547045735589431236}
   - component: {fileID: 5547045735589431243}
   m_Layer: 5
-  m_Name: Text_CanSpawnEntityCount
+  m_Name: Text_CanSpawnArmyEntityCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3042,7 +3042,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage 1 - 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

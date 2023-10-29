@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 1-1
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  UID: 1001
+  stageName: 1-1
+  stageState: 0
+  oneStarReward: 0
+  twoStarReward: 0
+  threeStarReward: 0
+  frontEnemyUIDs: 030000000400000005000000
+  frontEnemyLevels: 010000000100000001000000
+  centerEnemyUIDs: 
+  centerEnemyLevels: 
+  rearEnemyUIDs: 
+  rearEnemyLevels: 

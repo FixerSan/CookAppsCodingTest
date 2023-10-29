@@ -18,16 +18,35 @@ public class UIPopup_BattleBefore : UIPopup
 
         Managers.Event.OnVoidEvent -= OnChangeBattleInfo;
         Managers.Event.OnVoidEvent += OnChangeBattleInfo;
-        BindEvent(GetButton((int)Buttons.Button_Clear).gameObject, ClearUseSlots);
+        BindEvent(GetButton((int)Buttons.Button_Clear).gameObject, Managers.Game.battleInfo.UnUseAllBattleEntity );
         BindEvent(GetButton((int)Buttons.Button_ClosePopup).gameObject, () => { Managers.UI.ClosePopupUI(this); });
+        BindEvent(GetButton((int)Buttons.Button_Start).gameObject, () => { Managers.Scene.LoadScene(Define.Scene.Stage); });
 
         for (int i = 0; i < Managers.Data.playerData.hasEntites.Count; i++)
             CreateCanUseSlot(Managers.Data.playerData.hasEntites[i].UID, Managers.Data.playerData.hasEntites[i].level);
 
+        CreateEnemyUseSlots();
 
+        GetText((int)Texts.Text_Stage).text = $"Stage {Managers.Game.battleInfo.currentStage.stageName}";
+
+        GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseBattleEntityCount} / {Managers.Game.battleInfo.isCanUseBattleEntityCount}";
+        GetText((int)Texts.Text_ArmyBattleForce).text = $"{Managers.Game.battleInfo.armybattleForce}";
+
+        GetText((int)Texts.Text_CanSpawnEnemyEntityCount).text = $"{Managers.Game.battleInfo.nowEnemyCount} / {Managers.Game.battleInfo.nowEnemyCount}";
+        GetText((int)Texts.Text_EnemyBattleForce).text = $"{Managers.Game.battleInfo.enemybattleForce}";
         return true;
     }
 
+    public void OnChangeBattleInfo(Define.VoidEventType _type)
+    {
+        if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
+
+        GetText((int)Texts.Text_CanSpawnArmyEntityCount).text = $"{Managers.Game.battleInfo.nowUseBattleEntityCount} / {Managers.Game.battleInfo.isCanUseBattleEntityCount}";
+        GetText((int)Texts.Text_ArmyBattleForce).text = $"{Managers.Game.battleInfo.armybattleForce}";
+        ClearArmyUseSlots();
+        CreateArmyUseSlots();
+        UpdateCanUseSlots();
+    }
     public void CreateCanUseSlot(int _UID, int _level)
     {
         UISlot_CanUseBattleEntity slot = Managers.Resource.Instantiate("Slot_CanUseBattleEntity", _parent: GetObject((int)Objects.Panel_Slot).transform).GetOrAddComponent<UISlot_CanUseBattleEntity>();
@@ -65,20 +84,8 @@ public class UIPopup_BattleBefore : UIPopup
         }
     }
 
-    public void OnChangeBattleInfo(Define.VoidEventType _type)
-    {
-        if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
 
-        GetText((int)Texts.Text_CanSpawnEntityCount).text = $"{Managers.Game.battleInfo.nowUseBattleEntityCount} / {Managers.Game.battleInfo.isCanUseBattleEntityCount}";
-        GetText((int)Texts.Text_BattleForce).text = $"{Managers.Game.battleInfo.battleForce}";
-        ClearUseSlots();
-        CreateUseSlots();
-        UpdateCanUseSlots();
-    }
-
-
-
-    public void ClearUseSlots()
+    public void ClearArmyUseSlots()
     {
         for (int i = 0; i < useSlots.Count; i++)
         {
@@ -87,14 +94,14 @@ public class UIPopup_BattleBefore : UIPopup
         useSlots.Clear();
     }
 
-    public void CreateUseSlots()
+    public void CreateArmyUseSlots()
     {
         for (int i = 0; i < Managers.Game.battleInfo.armyFront.Length; i++)
         {
             if (Managers.Game.battleInfo.armyFront[i] != null)
             {
-                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_BattleEntitySpace_front).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
-                slot.Init(Managers.Game.battleInfo.armyFront[i]);
+                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_ArmyBattleEntitySpace_Front).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
+                slot.Init(Managers.Game.battleInfo.armyFront[i], UISlot_UseBattleEntity.SlotType.Army);
                 useSlots.Add(slot);
             }
         }
@@ -103,8 +110,8 @@ public class UIPopup_BattleBefore : UIPopup
         {
             if (Managers.Game.battleInfo.armyCenter[i] != null)
             {
-                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_BattleEntitySpace_Center).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
-                slot.Init(Managers.Game.battleInfo.armyCenter[i]);
+                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_ArmyBattleEntitySpace_Center).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
+                slot.Init(Managers.Game.battleInfo.armyCenter[i], UISlot_UseBattleEntity.SlotType.Army);
                 useSlots.Add(slot);
             }
         }
@@ -113,30 +120,47 @@ public class UIPopup_BattleBefore : UIPopup
         {
             if (Managers.Game.battleInfo.armyRear[i] != null)
             {
-                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_BattleEntitySpace_Rear).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
-                slot.Init(Managers.Game.battleInfo.armyRear[i]);
+                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_ArmyBattleEntitySpace_Rear).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
+                slot.Init(Managers.Game.battleInfo.armyRear[i], UISlot_UseBattleEntity.SlotType.Army);
                 useSlots.Add(slot);
+            }
+        }
+    }
+
+    public void CreateEnemyUseSlots()
+    {
+        for (int i = 0; i < Managers.Game.battleInfo.enemyFront.Length; i++)
+        {
+            if (Managers.Game.battleInfo.enemyFront[i] != null)
+            {
+                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_EnemyBattleEntitySpace_Front).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
+                slot.Init(Managers.Game.battleInfo.enemyFront[i], UISlot_UseBattleEntity.SlotType.Enemy);
             }
         }
     }
 
     private enum Buttons
     {
-        Button_Clear, Button_ClosePopup
+        Button_Clear, Button_ClosePopup, Button_Start
     }
     
     private enum Images
     {
-        Image_BattleEntitySpace_front, Image_BattleEntitySpace_Center, Image_BattleEntitySpace_Rear
+        Image_ArmyBattleEntitySpace_Front, Image_ArmyBattleEntitySpace_Center, Image_ArmyBattleEntitySpace_Rear , Image_EnemyBattleEntitySpace_Front, Image_EnemyBattleEntitySpace_Center, Image_EnemyBattleEntitySpace_Rear
     }
 
     private enum Texts
     {
-        Text_CanSpawnEntityCount, Text_BattleForce
+        Text_CanSpawnArmyEntityCount, Text_ArmyBattleForce, Text_Stage , Text_CanSpawnEnemyEntityCount, Text_EnemyBattleForce
     }
 
     public enum Objects
     {
         Panel_Slot
+    }
+
+    public void OnDestroy()
+    {
+        Managers.Event.OnVoidEvent -= OnChangeBattleInfo;
     }
 }

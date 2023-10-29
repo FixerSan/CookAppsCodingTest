@@ -25,7 +25,8 @@ public class UISlot_CanUseBattleEntity : UIBase
     
     public void UseBattleEntity()
     {
-        Managers.Game.battleInfo.UseBattleEntity(data);
+        if(slotState == SlotState.UnUsed)
+            Managers.Game.battleInfo.UseBattleEntity(data);
     }
 
     public void UpdateState(SlotState _state)

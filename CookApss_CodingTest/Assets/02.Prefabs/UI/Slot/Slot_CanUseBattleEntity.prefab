@@ -145,6 +145,8 @@ MonoBehaviour:
     maxHP: 0
     attackForce: 0
     skillCooltime: 0
+    moveSpeed: 0
+    canAttackDistance: 0
   slotState: 0
 --- !u!1 &3097499349903232269
 GameObject:

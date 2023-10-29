@@ -97,6 +97,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: 92a7469346de5624facf7a6ad0fafecc
+    m_Address: StageData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 3bb03d5201b91ae44b99693a4e1616f2
+    m_Address: OneChapterStageData.Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 420278c7cb281f645b3cb9815ea48d7a
+    m_Address: UIScene_Stage.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0a3ce9892cecf864db1d8ab456c0ed3d, type: 2}
   m_SchemaSet:

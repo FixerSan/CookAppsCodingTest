@@ -44,9 +44,14 @@ public class Define
 
     }
 
+    public enum StageState
+    {
+        ZeroStar, OneStar, TwoStar, ThreeStar
+    }
+
     public enum VoidEventType
     {
-        OnChangeBattleInfo
+        OnChangeBattleInfo, OnChangeControllerStatus
     }
 
     public enum IntEventType

@@ -25,7 +25,7 @@ public class UIHPBar : MonoBehaviour
     public void FixedUpdate()
     {
         if (controller.state == Define.BattleEntityState.Die) Managers.Resource.Destroy(gameObject);
-        hpSlider.fillAmount = controller.status.currentHP / controller.status.maxHP;
+        hpSlider.fillAmount = (float)controller.status.CurrentHP / (float)controller.status.maxHP;
         bundle.position = Managers.Screen.CameraController.Camera.WorldToScreenPoint(controller.transform.position + offset);
     }
 }

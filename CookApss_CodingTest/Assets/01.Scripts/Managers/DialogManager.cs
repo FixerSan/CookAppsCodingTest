@@ -25,7 +25,7 @@ public class DialogManager
     // 다이얼로그 불러오기
     public void Call(int _dialogIndex, Action _callback = null)
     {
-        currentData = Managers.Data.Get<DialogData>(_dialogIndex);
+        currentData = Managers.Data.GetDialogData(_dialogIndex);
         Speaker.ApplyDialog(currentData);
         if(_callback != null) callback = _callback;
     }
