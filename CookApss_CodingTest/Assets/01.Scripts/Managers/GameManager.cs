@@ -21,15 +21,18 @@ public class GameManager : Singleton<GameManager>
             });
         });
     }
-    
     public void StartGame(Action _callback)
     {
         Managers.Data.LoadPreData(() => { Managers.Scene.LoadScene(Define.Scene.Main); _callback?.Invoke(); });
     }
-
     public void SaveGame()
     {
         Managers.Data.SavePlayerData(Managers.Data.playerData);
+    }
+    private void Update()
+    {
+        if(battleInfo != null)
+            battleInfo.Update();
     }
 
     public void OnApplicationPause(bool pause)
@@ -256,6 +259,29 @@ public class BattleInfo
     public void UpdateUI()
     {
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattleInfo);
+    }
+
+
+    public void CheckTime()
+    {
+        if (Managers.Game.state == GameState.BattleProgress)
+        {
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                time = 0;
+                TimeOver();
+            }
+        }
+    }
+
+    public void TimeOver()
+    {
+
+    }
+    public void Update()
+    {
+        CheckTime();
     }
 
     public BattleInfo()

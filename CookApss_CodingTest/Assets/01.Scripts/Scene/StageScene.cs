@@ -291,6 +291,7 @@ public class StageScene : BaseScene
             item.FindTarget();
             item.ChangeState(Define.BattleEntityState.Follow);
         }
+        Managers.Game.state = Define.GameState.BattleProgress;
     }
 
     public override void Clear()
