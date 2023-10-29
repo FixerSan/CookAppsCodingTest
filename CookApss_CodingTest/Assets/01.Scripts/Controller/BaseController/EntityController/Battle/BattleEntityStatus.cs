@@ -6,7 +6,16 @@ using UnityEngine;
 public class BattleEntityStatus 
 {
     public int maxHP;
-    public int currentHP;
+    private int currentHP;
+    public int CurrentHP 
+    {
+        get { return currentHP; }
+        set 
+        { 
+            currentHP = value;
+            Managers.Event.OnVoidEvent?.Invoke(Define.VoidEventType.OnChangeControllerStatus);
+        }
+    }
     public int attackForce;
     public float skillCooltime;
     public float currentSkillCooltime;

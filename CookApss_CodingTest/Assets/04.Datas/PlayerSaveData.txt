@@ -1,1 +1,1 @@
-{"UID":0,"name":"Fixer","hasEntityUID":"0,1,2","hasEntityLevel":"1,1,1","knightageLevel":1}
+{"UID":0,"name":"Fixer","hasEntityUID":"0,1,2,3","hasEntityLevel":"1,1,1,2","knightageLevel":1}

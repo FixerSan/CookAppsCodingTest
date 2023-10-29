@@ -12,7 +12,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
-                _controller.rb.velocity = Vector2.zero;
+                _controller.Stop();
             }
 
             public override void ExitState(BattleEntityController _controller)
@@ -49,7 +49,27 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
+                _controller.FindTarget();
+            }
 
+            public override void ExitState(BattleEntityController _controller)
+            {
+
+            }
+
+            public override void UpdateState(BattleEntityController _controller)
+            {
+                _controller.entity.Follow();
+                if (_controller.entity.CheckAttack()) return;
+            }
+        }
+
+        public class Attack : State<BattleEntityController>
+        {
+            public override void EnterState(BattleEntityController _controller)
+            {
+                _controller.Stop();
+                _controller.Attack();
             }
 
             public override void ExitState(BattleEntityController _controller)
@@ -63,6 +83,40 @@ namespace BattleEntityStates
             }
         }
 
+        public class Die : State<BattleEntityController>
+        {
+            public override void EnterState(BattleEntityController _controller)
+            {
+                _controller.Die();
+            }
+
+            public override void ExitState(BattleEntityController _controller)
+            {
+
+            }
+
+            public override void UpdateState(BattleEntityController _controller)
+            {
+
+            }
+        }
+        public class EndBattle : State<BattleEntityController>
+        {
+            public override void EnterState(BattleEntityController _controller)
+            {
+
+            }
+
+            public override void ExitState(BattleEntityController _controller)
+            {
+
+            }
+
+            public override void UpdateState(BattleEntityController _controller)
+            {
+
+            }
+        }
     }
 
     namespace Zero
@@ -125,7 +179,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
-
+                _controller.Stop();
             }
 
             public override void ExitState(BattleEntityController _controller)
@@ -236,6 +290,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
+                _controller.Stop();
 
             }
 
@@ -346,6 +401,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
+                _controller.Stop();
 
             }
 
@@ -456,7 +512,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
-
+                _controller.Stop();
             }
 
             public override void ExitState(BattleEntityController _controller)
@@ -584,6 +640,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
+                _controller.Stop();
 
             }
 
@@ -712,6 +769,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
+                _controller.Stop();
 
             }
 

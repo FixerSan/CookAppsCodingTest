@@ -2,253 +2,313 @@
 "zero":[
  {
   "UID": 0,
+  "name": "Zero",
   "level": 1,
-  "maxHP": 100,
+  "maxHP": 1000,
   "attackForce": 50,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 0,
+  "name": "Zero",
   "level": 2,
-  "maxHP": 110,
+  "maxHP": 1100,
   "attackForce": 55,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 0,
+  "name": "Zero",
   "level": 3,
-  "maxHP": 120,
+  "maxHP": 1200,
   "attackForce": 60,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 0,
+  "name": "Zero",
   "level": 4,
-  "maxHP": 130,
+  "maxHP": 1300,
   "attackForce": 65,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 0,
+  "name": "Zero",
   "level": 5,
-  "maxHP": 140,
+  "maxHP": 1400,
   "attackForce": 70,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  }
 ],
 "one":[
  {
   "UID": 1,
+  "name": "One",
   "level": 1,
-  "maxHP": 100,
+  "maxHP": 1000,
   "attackForce": 50,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 1,
+  "name": "One",
   "level": 2,
-  "maxHP": 110,
+  "maxHP": 1100,
   "attackForce": 55,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 1,
+  "name": "One",
   "level": 3,
-  "maxHP": 120,
+  "maxHP": 1200,
   "attackForce": 60,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 1,
+  "name": "One",
   "level": 4,
-  "maxHP": 130,
+  "maxHP": 1300,
   "attackForce": 65,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 1,
+  "name": "One",
   "level": 5,
-  "maxHP": 140,
+  "maxHP": 1400,
   "attackForce": 70,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  }
 ],
 "two":[
  {
   "UID": 2,
+  "name": "Two",
   "level": 1,
-  "maxHP": 100,
+  "maxHP": 1000,
   "attackForce": 50,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 2,
+  "name": "Two",
   "level": 2,
-  "maxHP": 110,
+  "maxHP": 1100,
   "attackForce": 55,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 2,
+  "name": "Two",
   "level": 3,
-  "maxHP": 120,
+  "maxHP": 1200,
   "attackForce": 60,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 2,
+  "name": "Two",
   "level": 4,
-  "maxHP": 130,
+  "maxHP": 1300,
   "attackForce": 65,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 2,
+  "name": "Two",
   "level": 5,
-  "maxHP": 140,
+  "maxHP": 1400,
   "attackForce": 70,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  }
 ],
 "three":[
  {
   "UID": 3,
+  "name": "Three",
   "level": 1,
-  "maxHP": 100,
+  "maxHP": 1000,
   "attackForce": 50,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 3,
+  "name": "Three",
   "level": 2,
-  "maxHP": 110,
+  "maxHP": 1100,
   "attackForce": 55,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 3,
+  "name": "Three",
   "level": 3,
-  "maxHP": 120,
+  "maxHP": 1200,
   "attackForce": 60,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 3,
+  "name": "Three",
   "level": 4,
-  "maxHP": 130,
+  "maxHP": 1300,
   "attackForce": 65,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 3,
+  "name": "Three",
   "level": 5,
-  "maxHP": 140,
+  "maxHP": 1400,
   "attackForce": 70,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  }
 ],
 "four":[
  {
   "UID": 4,
+  "name": "Four",
   "level": 1,
-  "maxHP": 100,
+  "maxHP": 1000,
   "attackForce": 50,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 4,
+  "name": "Four",
   "level": 2,
-  "maxHP": 110,
+  "maxHP": 1100,
   "attackForce": 55,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 4,
+  "name": "Four",
   "level": 3,
-  "maxHP": 120,
+  "maxHP": 1200,
   "attackForce": 60,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 4,
+  "name": "Four",
   "level": 4,
-  "maxHP": 130,
+  "maxHP": 1300,
   "attackForce": 65,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 4,
+  "name": "Four",
   "level": 5,
-  "maxHP": 140,
+  "maxHP": 1400,
   "attackForce": 70,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  }
 ],
 "five":[
  {
   "UID": 5,
+  "name": "Five",
   "level": 1,
-  "maxHP": 100,
+  "maxHP": 1000,
   "attackForce": 50,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 5,
+  "name": "Five",
   "level": 2,
-  "maxHP": 110,
+  "maxHP": 1100,
   "attackForce": 55,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 5,
+  "name": "Five",
   "level": 3,
-  "maxHP": 120,
+  "maxHP": 1200,
   "attackForce": 60,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 5,
+  "name": "Five",
   "level": 4,
-  "maxHP": 130,
+  "maxHP": 1300,
   "attackForce": 65,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  },
  {
   "UID": 5,
+  "name": "Five",
   "level": 5,
-  "maxHP": 140,
+  "maxHP": 1400,
   "attackForce": 70,
   "skillCooltime": 5,
-  "moveSpeed": 5
+  "moveSpeed": 5,
+  "canAttackDistance": 0.6
  }
 ]
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Define;
 
 public class GameManager : Singleton<GameManager>
@@ -38,21 +39,36 @@ public class GameManager : Singleton<GameManager>
     }
 }
 
+[System.Serializable]
 public class BattleInfo
 {
-    public BattleEntityData[] armyRear;
-    public BattleEntityData[] armyCenter;
-    public BattleEntityData[] armyFront;
+    public StageData currentStage;
 
-    public BattleEntityData[] enemyRear;
-    public BattleEntityData[] enemyCenter;
-    public BattleEntityData[] enemyFront;
+    public BattleEntityData[] armyFront;
+    public BattleEntityData[] armyCenter;
+    public BattleEntityData[] armyRear;
 
     public int isCanUseBattleEntityCount;
     public int nowUseBattleEntityCount;
-    public int battleForce;
+    public int armyCurrentHP;
+    public int armyMaxHP;
+    public int armyAttackForce;
+    public int armybattleForce;
+
+    public BattleEntityData[] enemyFront;
+    public BattleEntityData[] enemyCenter;
+    public BattleEntityData[] enemyRear;
+
+    public int nowEnemyCount;
+    public int enemyCurrentHP;
+    public int enemyMaxHP;
+    public int enemyAttackForce;
+    public int enemybattleForce;
 
     public Dictionary<string, int> specialties;
+
+    public bool isFastSpeed;
+    public float time;
 
     public bool UseBattleEntity(BattleEntityData _data)
     {
@@ -63,7 +79,7 @@ public class BattleInfo
         if (nullIndex != -1)
         {
             armyFront[nullIndex] = _data;
-            SetInformationValue();
+            SetArmyBattleForceValue();
             return true;
         }
 
@@ -71,7 +87,7 @@ public class BattleInfo
         if(nullIndex != -1)
         {
             armyCenter[nullIndex] = _data;
-            SetInformationValue();
+            SetArmyBattleForceValue();
             return true;
         }
 
@@ -79,7 +95,7 @@ public class BattleInfo
         if (nullIndex != -1)
         {
             armyRear[nullIndex] = _data;
-            SetInformationValue();
+            SetArmyBattleForceValue();
             return true;
         }
 
@@ -94,42 +110,56 @@ public class BattleInfo
             if (armyFront[i] == _data)
             {
                 armyFront[i] = null;
-                SetInformationValue();
+                SetArmyBattleForceValue();
                 return;
             }
         }
 
         for (int i = 0; i < armyCenter.Length; i++)
         {
-            if (armyFront[i] == _data)
+            if (armyCenter[i] == _data)
             {
-                armyFront[i] = null;
-                SetInformationValue();
+                armyCenter[i] = null;
+                SetArmyBattleForceValue();
                 return;
             }
         }
 
         for (int i = 0; i < armyRear.Length; i++)
         {
-            if (armyFront[i] == _data)
+            if (armyRear[i] == _data)
             {
-                armyFront[i] = null;
-                SetInformationValue();
+                armyRear[i] = null;
+                SetArmyBattleForceValue();
                 return;
             }
         }
     }
 
-    private void SetInformationValue()
+    public void UnUseAllBattleEntity()
+    {
+        armyFront = new BattleEntityData[3];
+        armyCenter = new BattleEntityData[3];
+        armyRear = new BattleEntityData[3];
+
+        nowUseBattleEntityCount = 0;
+        armybattleForce = 0;
+
+        UpdateUI();
+    }
+
+    private void SetArmyBattleForceValue()
     {
         //개인 특성을 추가 한다면 여기에 기능 추가
-        battleForce = 0;
+        armyAttackForce = 0;
+        armyMaxHP = 0;
+        armybattleForce = 0;
         for (int i = 0; i < armyFront.Length; i++)
         {
             if (armyFront[i] != null)
             {
-                battleForce += armyFront[i].attackForce;
-                battleForce += armyFront[i].maxHP;
+                armyAttackForce += armyFront[i].attackForce;
+                armyMaxHP += armyFront[i].maxHP;
             }
         }
 
@@ -137,8 +167,8 @@ public class BattleInfo
         {
             if (armyCenter[i] != null)
             {
-                battleForce += armyCenter[i].attackForce;
-                battleForce += armyCenter[i].maxHP;
+                armyAttackForce += armyCenter[i].attackForce;
+                armyMaxHP += armyCenter[i].maxHP;
             }
         }
 
@@ -146,10 +176,85 @@ public class BattleInfo
         {
             if (armyRear[i] != null)
             {
-                battleForce += armyRear[i].attackForce;
-                battleForce += armyRear[i].maxHP;
+                armyAttackForce += armyRear[i].attackForce;
+                armyMaxHP += armyRear[i].maxHP;
             }
         }
+
+        armybattleForce = armyAttackForce + armyMaxHP;
+        UpdateUI();
+    }
+
+    public void SetStageData(int _UID)
+    {
+        currentStage = Managers.Data.GetStageData(_UID);
+
+        nowEnemyCount = 0;
+        enemyAttackForce = 0;
+        enemyMaxHP = 0;
+        enemybattleForce = 0;
+        time = 60;
+
+        enemyFront = new BattleEntityData[3];
+        for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
+        {
+            BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.frontEnemyUIDs[i], currentStage.frontEnemyLevels[i]);
+            enemyFront[i] = data;
+            nowEnemyCount++;
+            enemyAttackForce += data.attackForce;
+            enemyMaxHP += data.maxHP;
+        }
+        enemyCenter = new BattleEntityData[3];
+        for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
+        {
+            BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.centerEnemyUIDs[i], currentStage.centerEnemyLevels[i]);
+            enemyFront[i] = data;
+            nowEnemyCount++;
+            enemyAttackForce += data.attackForce;
+            enemyMaxHP += data.maxHP;
+        }
+
+        enemyRear = new BattleEntityData[3];
+        for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
+        {
+            BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.rearEnemyUIDs[i], currentStage.rearEnemyLevels[i]);
+            enemyFront[i] = data;
+            nowEnemyCount++;
+            enemyAttackForce += data.attackForce;
+            enemyMaxHP += data.maxHP;
+        }
+
+        enemybattleForce = enemyMaxHP + enemyAttackForce;
+    }
+
+    public void SetTeamHP(VoidEventType _type)
+    {
+        if (_type != VoidEventType.OnChangeControllerStatus) return;
+        armyCurrentHP = 0;
+        enemyCurrentHP = 0;
+        foreach (var item in Managers.Object.Armys)
+            armyCurrentHP += item.status.CurrentHP;
+        foreach (var item in Managers.Object.Enemys)
+            enemyCurrentHP += item.status.CurrentHP;
+        UpdateUI();
+    }
+
+    public void StartStage()
+    {
+        armyCurrentHP = armyMaxHP;
+        enemyCurrentHP = enemyMaxHP;
+        UpdateUI();
+    }
+
+    public void ChangeFastSpeed()
+    {
+        isFastSpeed = !isFastSpeed;
+        if (isFastSpeed) Time.timeScale = 1.5f;
+        else Time.timeScale = 1.0f;
+    }
+
+    public void UpdateUI()
+    {
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattleInfo);
     }
 
@@ -163,9 +268,10 @@ public class BattleInfo
         enemyCenter = new BattleEntityData[3];
         enemyFront = new BattleEntityData[3];
 
-        isCanUseBattleEntityCount = 3;
+        isCanUseBattleEntityCount = 4;
         specialties = new Dictionary<string, int>();
+
+        Managers.Event.OnVoidEvent -= SetTeamHP;
+        Managers.Event.OnVoidEvent += SetTeamHP;
     }
 }
-
-

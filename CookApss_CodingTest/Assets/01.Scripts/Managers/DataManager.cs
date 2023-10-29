@@ -11,14 +11,23 @@ public class DataManager
     public Dictionary<int, Dictionary<int,BattleEntityData>> battleEntityStatusDatas;
     public Dictionary<int, KnightageData> knightageDatas;
     public Dictionary<int, DialogData> dialogDatas;
+    public Dictionary<int, StageData> stageDatas;
     public readonly string PLAYERSAVEDATA_PATH;
 
-    public T Get<T>(int _UID) where T : Data
+    public PlayerData GetPlayerData(int _UID)
     {
-        if (typeof(T) == typeof(PlayerData)) return LoadPlayerData(_UID) as T;
-        if (typeof(T) == typeof(DialogData)) if (dialogDatas.TryGetValue(_UID, out DialogData _data)) return _data as T;
+        return LoadPlayerData(_UID);
+    }
 
-        Debug.LogError("데이터가 반환되지 않았습니다.");
+    public StageData GetStageData(int _UID)
+    {
+        if (stageDatas.TryGetValue(_UID, out StageData _data)) return _data;
+        return null;
+    }
+
+    public DialogData GetDialogData(int _UID)
+    {
+        if (dialogDatas.TryGetValue(_UID, out DialogData _data)) return _data;
         return null;
     }
 
@@ -31,10 +40,10 @@ public class DataManager
 
     public void LoadPreData(Action _callback)
     {
-        LoadPlayerData(Define.userUID);
+        GetPlayerData(Define.userUID);
         LoadBattleEntityStatusData();
+        LoadStageData();
 
-        //LoadKnightageData();
         _callback?.Invoke();
     }
 
@@ -82,16 +91,15 @@ public class DataManager
         }
     }
 
-    //public void LoadKnightageData()
-    //{
-    //    TextAsset textAsset = Managers.Resource.Load<TextAsset>("BattleEntityData");
-    //    KnightageDatas _battleEntityStatusDatas = JsonUtility.FromJson<KnightageDatas>(textAsset.text);
+    public void LoadStageData()
+    {
+        StageDatas datas = Managers.Resource.Load<StageDatas>("OneChapterStageData.Data");
+        for (int i = 0; i < datas.normal.Length; i++)
+            stageDatas.Add(datas.normal[i].UID, datas.normal[i]);
 
-    //    for (int i = 0; i < _battleEntityStatusDatas.knightageDatas.Length; i++)
-    //    {
-    //        knightageDatas.Add(_battleEntityStatusDatas.knightageDatas[i].level, _battleEntityStatusDatas.knightageDatas[i]);
-    //    }
-    //}
+        for (int i = 0; i < datas.hard.Length; i++)
+            stageDatas.Add(datas.hard[i].UID, datas.hard[i]);
+    }
 
     public void SavePlayerData(PlayerData _playerData)
     {
@@ -122,6 +130,7 @@ public class DataManager
         dialogDatas = new Dictionary<int, DialogData> ();
         battleEntityStatusDatas = new Dictionary<int, Dictionary<int, BattleEntityData>>();
         knightageDatas = new Dictionary<int,  KnightageData>();
+        stageDatas = new Dictionary<int, StageData>();
         PLAYERSAVEDATA_PATH = Path.Combine(Application.dataPath + "/04.Datas/", "PlayerSaveData.txt");
     }
 }
@@ -220,6 +229,7 @@ public class BattleEntityData : Data
     public int attackForce;
     public float skillCooltime;
     public int moveSpeed;
+    public float canAttackDistance;
 }
 
 public class BattleEntityDatas : Data
@@ -230,4 +240,28 @@ public class BattleEntityDatas : Data
     public BattleEntityData[] three;
     public BattleEntityData[] four;
     public BattleEntityData[] five;
+}
+
+[CreateAssetMenu(fileName = "StageData", menuName = "Container/StageData")]
+public class StageData : ScriptableObject
+{
+    public int UID;
+    public string stageName;
+    public Define.StageState stageState;
+    public int oneStarReward;
+    public int twoStarReward;
+    public int threeStarReward;
+    public int[] frontEnemyUIDs;
+    public int[] frontEnemyLevels;
+    public int[] centerEnemyUIDs;
+    public int[] centerEnemyLevels;
+    public int[] rearEnemyUIDs;
+    public int[] rearEnemyLevels;
+}
+
+[CreateAssetMenu(fileName = "StageDatas", menuName = "Container/StageDatas")]
+public class StageDatas : ScriptableObject
+{
+    public StageData[] normal;
+    public StageData[] hard;
 }
