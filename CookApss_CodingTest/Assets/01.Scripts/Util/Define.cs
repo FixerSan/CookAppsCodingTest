@@ -14,6 +14,11 @@ public class Define
         BattleProgress,
         BattleAfter
     }
+
+    public enum GameResult
+    {
+        Victory, Lose
+    }
     
     public enum BattleEntity
     {

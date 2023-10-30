@@ -6,7 +6,7 @@ using UnityEngine.PlayerLoop;
 
 public class UIScene_Stage : UIScene
 {
-    public List<UISlot_MVPPoint> slots = new List<UISlot_MVPPoint>();
+    public List<UISlot_MVPPoint> mvpSlots = new List<UISlot_MVPPoint>();
     public override bool Init()
     {
         if (!base.Init()) return false;
@@ -21,6 +21,12 @@ public class UIScene_Stage : UIScene
             GetButton((int)Buttons.Button_FastSpeed).interactable = !Managers.Game.battleInfo.isFastSpeed;
         });
 
+        BindEvent(GetButton((int)Buttons.Button_AutoSkill).gameObject, () =>
+        {
+            Managers.Game.battleInfo.ChangeAutoSkill();
+            GetButton((int)Buttons.Button_AutoSkill).interactable = !Managers.Game.battleInfo.isAutoSkill;
+        });
+
         Managers.Event.OnVoidEvent -= UpdateUI;
         Managers.Event.OnVoidEvent += UpdateUI;
 
@@ -29,7 +35,13 @@ public class UIScene_Stage : UIScene
         {
             UISlot_MVPPoint slot = Managers.Resource.Instantiate("Slot_MVPPoint", GetObject((int)Objects.Trans_MvpSlot).transform).GetOrAddComponent<UISlot_MVPPoint>();
             slot.Init(i);
-            slots.Add(slot);
+            mvpSlots.Add(slot);
+        }
+
+        for (int i = 0; i < Managers.Object.Armys.Count; i++)
+        {
+            UISlot_StageEntity slot = Managers.Resource.Instantiate("Slot_StageEntity", GetObject((int)Objects.Bundle_EntitySlot).transform).GetOrAddComponent<UISlot_StageEntity>();
+            slot.Init(Managers.Object.Armys[i]);
         }
         return true;
     }
@@ -41,10 +53,15 @@ public class UIScene_Stage : UIScene
         GetImage((int)Images.Image_ArmyHP).fillAmount = (float)Managers.Game.battleInfo.armyCurrentHP / Managers.Game.battleInfo.armyMaxHP;
         GetImage((int)Images.Image_EnemyHP).fillAmount = (float)Managers.Game.battleInfo.enemyCurrentHP / Managers.Game.battleInfo.enemyMaxHP;
         GetText((int)Texts.Text_Time).text = $"00:{((int)Managers.Game.battleInfo.time)}";
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < mvpSlots.Count; i++)
         {
-            slots[i].UpdateValue();
+            mvpSlots[i].UpdateValue();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Managers.Event.OnVoidEvent -= UpdateUI;
     }
 
     public enum Buttons
@@ -61,6 +78,6 @@ public class UIScene_Stage : UIScene
     }
     private enum Objects
     {
-        Trans_MvpSlot
+        Trans_MvpSlot, Bundle_EntitySlot
     }
 }

@@ -121,7 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     maxHP: 0
-    currentHP: 0
     attackForce: 0
     skillCooltime: 0
     currentSkillCooltime: 0
@@ -129,4 +128,9 @@ MonoBehaviour:
   entityType: 0
   state: 0
   rb: {fileID: 0}
-  target: {fileID: 0}
+  moveTarget: {fileID: 0}
+  attackTarget: {fileID: 0}
+  currentSkillCooltime: 0
+  currentAttackForce: 0
+  currentAttackCycle: 0
+  mvpPoint: 0

@@ -8,6 +8,7 @@ public class MainScene : BaseScene
     public override void Init(Action _callback = null)
     {
         Managers.UI.ShowSceneUI<UIScene_Main>();
+        Managers.Game.state = Define.GameState.BattleBefore;
     }
 
     public override void Clear()

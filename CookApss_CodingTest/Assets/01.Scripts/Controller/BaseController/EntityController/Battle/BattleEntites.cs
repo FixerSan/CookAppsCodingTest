@@ -7,6 +7,26 @@ public abstract class BattleEntity : IAttackable, IHittable
 {
     protected BattleEntityController controller;
     public BattleEntityData data;
+
+    public virtual bool CheckAttack()
+    {
+        if (controller.currentAttackCycle > 0)
+        {
+            controller.currentAttackCycle -= Time.deltaTime;
+            if (controller.currentAttackCycle <= 0)
+                controller.currentAttackCycle = 0;
+        }
+        if (controller.attackTarget == null) return false;
+        if (controller.currentAttackCycle > 0) return false;
+        if (controller.state != Define.BattleEntityState.Follow) return false;
+        if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) < data.canAttackDistance)
+        {
+            controller.ChangeState(Define.BattleEntityState.Attack);
+            return true;
+        }
+        return false;
+    }
+
     public virtual void Attack()
     {
         controller.routines.Add("attack", controller.StartCoroutine(AttackRoutine()));
@@ -14,6 +34,7 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual IEnumerator AttackRoutine()
     {
+        controller.currentAttackCycle = data.attackCycle;
         Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { controller.mvpPoint += _damage; });
         Managers.Game.battleInfo.UpdateMVPPoints();
         yield return new WaitForSeconds(1);
@@ -49,6 +70,11 @@ public abstract class BattleEntity : IAttackable, IHittable
     {
         if (controller.attackTarget != null)
         {
+            if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) < data.canAttackDistance)
+            {
+                controller.Stop();
+                return;
+            }
             Vector2 dir = (controller.attackTarget.transform.position - controller.transform.position).normalized;
             controller.rb.velocity = 250 * dir * controller.status.moveSpeed * Time.deltaTime;
         }
@@ -64,23 +90,31 @@ public abstract class BattleEntity : IAttackable, IHittable
         return false;
     }
 
-    public virtual bool CheckAttack()
-    {
-        if (controller.attackTarget == null) return false;
-        if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) < data.canAttackDistance)
-        {
-            controller.ChangeState(Define.BattleEntityState.Attack);
-            return true;
-        }
-        return false;
-    }
-
 
     public virtual bool CheckCanUseSkill()
     {
+        if(controller.currentSkillCooltime > 0)
+        {
+            controller.currentSkillCooltime -= Time.deltaTime;
+            if (controller.currentSkillCooltime <= 0)
+                controller.currentSkillCooltime = 0;
+        }
+        if (Managers.Screen.isSkillCasting) return false;
+        if (controller.entityType == Define.BattleEntityType.Enemy) 
+        {
+            if (controller.state != Define.BattleEntityState.Follow) return false;
+            if (controller.currentSkillCooltime <= 0)
+            {
+                controller.ChangeState(Define.BattleEntityState.SkillCast);
+                return true;
+            }
+            else return false;
+        }
+
+        if (!Managers.Game.battleInfo.isAutoSkill) return false;
+        if (controller.state != Define.BattleEntityState.Follow) return false;
         if (controller.currentSkillCooltime <= 0)
         {
-            controller.currentSkillCooltime = data.skillCooltime;
             controller.ChangeState(Define.BattleEntityState.SkillCast);
             return true;
         }
@@ -88,6 +122,13 @@ public abstract class BattleEntity : IAttackable, IHittable
     }
 
     public abstract void Skill();
+    public void BaseSkill()
+    {
+        controller.StopAllRoutine();
+        Managers.Screen.SkillScreen();
+        controller.ChangeStateWithDelay(Define.BattleEntityState.Follow, 2);
+        controller.currentSkillCooltime = data.skillCooltime;
+    }
 }
 
 namespace BattleEntites
@@ -96,7 +137,7 @@ namespace BattleEntites
     {
         public override void Skill()
         {
-
+            BaseSkill();
         }
 
         public Zero(BattleEntityController _controller, BattleEntityData _data)
@@ -110,7 +151,7 @@ namespace BattleEntites
     {
         public override void Skill()
         {
-
+            BaseSkill();
         }
 
         public One(BattleEntityController _controller, BattleEntityData _data)
@@ -126,8 +167,9 @@ namespace BattleEntites
 
         public override void Skill()
         {
-
+            BaseSkill();
         }
+
         public Two(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -140,8 +182,9 @@ namespace BattleEntites
 
         public override void Skill()
         {
-
+            BaseSkill();
         }
+
         public Three(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -154,8 +197,9 @@ namespace BattleEntites
 
         public override void Skill()
         {
-
+            BaseSkill();
         }
+
         public Four (BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -168,8 +212,9 @@ namespace BattleEntites
 
         public override void Skill()
         {
-
+            BaseSkill();
         }
+
         public Five(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;

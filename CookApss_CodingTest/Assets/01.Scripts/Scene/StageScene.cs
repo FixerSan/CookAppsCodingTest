@@ -258,16 +258,11 @@ public class StageScene : BaseScene
         if (Managers.Game.state != Define.GameState.BattleProgress) return;
 
         if (Managers.Game.battleInfo.armyCurrentHP == 0)
-        {
-            Managers.Game.state = Define.GameState.BattleAfter;
-            Debug.Log("¿˚∆¿¿Ã ¿Ã∞ÂΩ¿¥œ¥Ÿ.");
-        }
+            Managers.Game.battleInfo.Lose();
 
         if (Managers.Game.battleInfo.enemyCurrentHP == 0)
-        {
-            Managers.Game.state = Define.GameState.BattleAfter;
-            Debug.Log("æ∆±∫∆¿¿Ã ¿Ã∞ÂΩ¿¥œ¥Ÿ.");
-        }
+            Managers.Game.battleInfo.Victory();
+
     }
 
     public override void SceneEvent(int _eventIndex, Action _callback = null)

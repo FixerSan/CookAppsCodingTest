@@ -230,6 +230,7 @@ public class BattleEntityData : Data
     public float skillCooltime;
     public int moveSpeed;
     public float canAttackDistance;
+    public float attackCycle;
 }
 
 public class BattleEntityDatas : Data

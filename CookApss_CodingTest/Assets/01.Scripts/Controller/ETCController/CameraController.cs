@@ -112,6 +112,16 @@ public class CameraController : MonoBehaviour
         _callback?.Invoke();
     }
 
+    public IEnumerator SkillScreenRoutine(Action _callback = null)
+    {
+        Managers.Screen.isSkillCasting = true;
+        float currentTime = Time.timeScale;
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = currentTime;
+        _callback?.Invoke();
+    }
+
 
 
     private void Update()

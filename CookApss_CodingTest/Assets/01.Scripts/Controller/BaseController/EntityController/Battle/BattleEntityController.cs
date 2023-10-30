@@ -20,11 +20,12 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     public BattleEntityController attackTarget;
 
     private bool isDead;
-    private bool isAutoSkillCasting;
     private bool init = false;
 
 
     public float currentSkillCooltime;
+    public int currentAttackForce;
+    public float currentAttackCycle;
     public int mvpPoint;
 
     public void Init(BattleEntity _entity, Dictionary<BattleEntityState, State<BattleEntityController>> _states, BattleEntityStatus _status, BattleEntityType _entityType)
@@ -40,6 +41,8 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         stateMachine = new StateMachine<BattleEntityController>(this, states[BattleEntityState.Idle]);
 
         currentSkillCooltime = _entity.data.skillCooltime;
+        currentAttackForce = _entity.data.attackForce;
+        currentAttackCycle = 0;
         mvpPoint = 0;
 
         UIHPBar hpBar =  Managers.Resource.Instantiate("UIHPbar", _pooling:true).GetOrAddComponent<UIHPBar>();
@@ -47,12 +50,6 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         hpBar.Init(this);
 
         isDead = false;
-        if (entityType == BattleEntityType.Enemy)
-            isAutoSkillCasting = true;
-        else
-        { //여기에서 현재 플레이어 상태에 따라 정의
-        }
-          //여기에서 현재 플레이어 상태에 따라 정의
         init = true;
     }
 
@@ -90,6 +87,7 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     {
         foreach (var routine in routines)
             StopCoroutine(routine.Value);
+        routines.Clear();
     }
 
     public void Stop()
@@ -120,6 +118,10 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
 
         attackTarget = tempTrans;
     }
+    public void SetTarget(Transform _target)
+    {
+        moveTarget = _target;
+    }
 
     public void ChangeState(BattleEntityState _nextState , bool _isChangeSameState = false)
     {
@@ -134,15 +136,28 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         stateMachine.ChangeState(states[_nextState]);
     }
 
-    public void SetTarget(Transform _target)
+    public void ChangeStateWithDelay(BattleEntityState _nextState, float _delay,bool _isChangeSameState = false)
     {
-        moveTarget = _target;
+        if (!init) return;
+        routines.Add("ChangeStateWithDelay", StartCoroutine(ChangeStateWithDelayRoutine(_nextState, _delay, _isChangeSameState)));
+    }
+
+    private IEnumerator ChangeStateWithDelayRoutine(BattleEntityState _nextState, float _delay, bool _isChangeSameState = false)
+    {
+        yield return new WaitForSeconds(_delay);
+        ChangeState(_nextState, _isChangeSameState);
+        routines.Remove("ChangeStateWithDelay");
     }
 
     public void Update()
     {
         if (!init) return;
         stateMachine.UpdateState();
+    }
+
+    public void OnDisable()
+    {
+        StopAllRoutine();
     }
 }
 

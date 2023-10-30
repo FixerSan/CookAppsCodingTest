@@ -24,7 +24,7 @@ public class ScreenManager
         }
     }
 
-
+    public bool isSkillCasting = false;
     public void SetCamera(CameraController _cameraController)
     {
         cameraController = _cameraController;
@@ -68,5 +68,13 @@ public class ScreenManager
     public void FadeInOut(float _totalTile, Action _callback = null)
     {
         Managers.Routine.StartCoroutine(CameraController.FadeInOut(_totalTile, () => { _callback?.Invoke(); }));
+    }
+
+    public void SkillScreen()
+    {
+        isSkillCasting = true;
+        Debug.Log("스킬 스크린 실행 됨");
+        Managers.Routine.StartCoroutine(CameraController.SkillScreenRoutine(() => { isSkillCasting = false; Debug.Log("스킬 스크린 종료 됨");
+        }));
     }
 }

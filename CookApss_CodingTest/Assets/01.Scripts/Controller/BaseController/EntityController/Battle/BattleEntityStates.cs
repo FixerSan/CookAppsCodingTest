@@ -81,7 +81,7 @@ namespace BattleEntityStates
 
             public override void UpdateState(BattleEntityController _controller)
             {
-
+                if (_controller.entity.CheckCanUseSkill()) return;
             }
         }
 
@@ -89,7 +89,8 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
-                _controller
+                _controller.Stop();
+                _controller.Skill();
             }
 
             public override void ExitState(BattleEntityController _controller)
@@ -124,7 +125,7 @@ namespace BattleEntityStates
         {
             public override void EnterState(BattleEntityController _controller)
             {
-
+                _controller.StopAllRoutine();
             }
 
             public override void ExitState(BattleEntityController _controller)

@@ -69,12 +69,14 @@ public class BattleInfo
     public int enemybattleForce;
 
     public Dictionary<string, int> specialties;
-
+    public bool isAutoSkill;
     public bool isFastSpeed;
     public float time;
 
     public List<BattleEntityController> battleMVPPoints;
-    public int allBattlePoint = 0;
+    public int allBattlePoint;
+
+    public int clearStar;
 
     public bool UseBattleEntity(BattleEntityData _data)
     {
@@ -230,6 +232,9 @@ public class BattleInfo
     }
     public void StartStage()
     {
+        clearStar = 0;
+        allBattlePoint = 0;
+
         armyCurrentHP = armyMaxHP;
         enemyCurrentHP = enemyMaxHP;
 
@@ -237,7 +242,6 @@ public class BattleInfo
         battleMVPPoints = Managers.Object.Armys;
         UpdateUI();
     }   
-
     public void UpdateMVPPoints()
     {
         List<BattleEntityController> tempList = new List<BattleEntityController>();
@@ -274,6 +278,7 @@ public class BattleInfo
     public void UpdateTeamHP(VoidEventType _type)
     {
         if (_type != VoidEventType.OnChangeControllerStatus) return;
+        if (Managers.Game.state != GameState.BattleProgress) return;
         armyCurrentHP = 0;
         enemyCurrentHP = 0;
         foreach (var item in Managers.Object.Armys)
@@ -288,6 +293,10 @@ public class BattleInfo
         if (isFastSpeed) Time.timeScale = 1.5f;
         else Time.timeScale = 1.0f;
     }
+    public void ChangeAutoSkill()
+    {
+        isAutoSkill = !isAutoSkill;
+    }
     public void UpdateUI()
     {
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattleInfo);
@@ -297,6 +306,7 @@ public class BattleInfo
         if (Managers.Game.state == GameState.BattleProgress)
         {
             time -= Time.deltaTime;
+            UpdateUI();
             if (time <= 0)
             {
                 time = 0;
@@ -304,6 +314,78 @@ public class BattleInfo
             }
         }
     }
+    public void Victory()
+    {
+        Managers.Game.state = Define.GameState.BattleAfter;
+        Managers.Routine.StartCoroutine(VictoryRoutine());
+    }
+    public void Lose()
+    {
+        Managers.Game.state = Define.GameState.BattleAfter;
+        Managers.Routine.StartCoroutine(LoseRoutine());
+    }
+
+    private void BaseEndStage()
+    {
+        armyFront = new BattleEntityData[3];
+        armyCenter = new BattleEntityData[3];
+        armyRear = new BattleEntityData[3];
+        nowUseBattleEntityCount = 0;
+        armyCurrentHP = 0;
+        armyMaxHP = 0;
+        armyAttackForce = 0;
+        armybattleForce = 0;
+        Time.timeScale = 1.0f;
+        for (int i = 0; i < Managers.Object.Armys.Count; i++)
+            Managers.Object.Armys[i].StopAllRoutine();
+        Managers.Object.Armys.Clear();
+
+        for (int i = 0; i < Managers.Object.Enemys.Count; i++)
+            Managers.Object.Enemys[i].StopAllRoutine();
+        Managers.Object.Enemys.Clear();
+    }
+
+    private IEnumerator VictoryRoutine()
+    {
+        for (int i = 0; i < Managers.Object.Armys.Count; i++)
+            Managers.Object.Armys[i].ChangeState(BattleEntityState.EndBattle);
+
+        yield return new WaitForSeconds(2);
+        Managers.Screen.FadeIn(0.5f, () =>
+        {
+            BaseEndStage();
+            int aliveArmyCount = 0;
+            for (int i = 0; i < Managers.Object.Armys.Count; i++)
+                if (Managers.Object.Armys[i].state != BattleEntityState.Die)
+                    aliveArmyCount++;
+
+            if (aliveArmyCount == Managers.Object.Armys.Count)
+                clearStar = 3;
+
+            else if (aliveArmyCount >= ((float)Managers.Object.Armys.Count / 3) * 2)
+                clearStar = 2;
+
+            else clearStar = 1;
+
+            Managers.UI.ShowPopupUI<UIPopup_Result>("").Init(Define.GameResult.Victory);
+            Managers.Screen.FadeOut(0.5f);
+        });
+    }
+
+    private IEnumerator LoseRoutine()
+    {
+        for (int i = 0; i < Managers.Object.Enemys.Count; i++)
+            Managers.Object.Enemys[i].ChangeState(BattleEntityState.EndBattle);
+        yield return new WaitForSeconds(2);
+
+        Managers.Screen.FadeIn(0.5f, () =>
+        {
+            BaseEndStage();
+            Managers.UI.ShowPopupUI<UIPopup_Result>("").Init(Define.GameResult.Lose);
+            Managers.Screen.FadeOut(0.5f);
+        });
+    }
+
     public void TimeOver()
     {
 
@@ -326,6 +408,8 @@ public class BattleInfo
         isCanUseBattleEntityCount = 4;
         specialties = new Dictionary<string, int>();
         battleMVPPoints = new List<BattleEntityController>();
+        isAutoSkill = false;
+        isFastSpeed = false;
 
         Managers.Event.OnVoidEvent -= UpdateTeamHP;
         Managers.Event.OnVoidEvent += UpdateTeamHP;
