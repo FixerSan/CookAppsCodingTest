@@ -24,6 +24,9 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     private bool init = false;
 
 
+    public float currentSkillCooltime;
+    public int mvpPoint;
+
     public void Init(BattleEntity _entity, Dictionary<BattleEntityState, State<BattleEntityController>> _states, BattleEntityStatus _status, BattleEntityType _entityType)
     {
         if (init) return;
@@ -35,7 +38,12 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         rb = gameObject.GetOrAddComponent<Rigidbody2D>();
         routines = new Dictionary<string, Coroutine>();
         stateMachine = new StateMachine<BattleEntityController>(this, states[BattleEntityState.Idle]);
+
+        currentSkillCooltime = _entity.data.skillCooltime;
+        mvpPoint = 0;
+
         UIHPBar hpBar =  Managers.Resource.Instantiate("UIHPbar", _pooling:true).GetOrAddComponent<UIHPBar>();
+
         hpBar.Init(this);
 
         isDead = false;
@@ -50,6 +58,7 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
 
     public void Attack()
     {
+        if (isDead) return;
         entity.Attack();
     }
 
@@ -63,6 +72,11 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     {
         if (isDead) return;
         entity.Hit(_damage);
+    }
+    public void Skill()
+    {
+        if (isDead) return;
+        entity.Skill();
     }
 
     public void Die()
@@ -83,12 +97,13 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         rb.velocity = Vector3.zero;
     }
 
+
     public void FindTarget()
     {
         BattleEntityController tempTrans = null;
         float minDistace = 10000000;
         float currentDistance = 0;
-        HashSet<BattleEntityController> tempHashSet = null; ;
+        List<BattleEntityController> tempHashSet = null; ;
 
         if (entityType == BattleEntityType.Army) tempHashSet = Managers.Object.Enemys;
         else tempHashSet = Managers.Object.Armys;

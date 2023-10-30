@@ -59,6 +59,8 @@ namespace BattleEntityStates
 
             public override void UpdateState(BattleEntityController _controller)
             {
+
+                if (_controller.entity.CheckCanUseSkill()) return;
                 _controller.entity.Follow();
                 if (_controller.entity.CheckAttack()) return;
             }
@@ -70,6 +72,24 @@ namespace BattleEntityStates
             {
                 _controller.Stop();
                 _controller.Attack();
+            }
+
+            public override void ExitState(BattleEntityController _controller)
+            {
+
+            }
+
+            public override void UpdateState(BattleEntityController _controller)
+            {
+
+            }
+        }
+
+        public class SkillCast : State<BattleEntityController>
+        {
+            public override void EnterState(BattleEntityController _controller)
+            {
+                _controller
             }
 
             public override void ExitState(BattleEntityController _controller)

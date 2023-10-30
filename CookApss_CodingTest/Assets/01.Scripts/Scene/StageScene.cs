@@ -255,10 +255,19 @@ public class StageScene : BaseScene
     public void CheckEndStage(Define.VoidEventType _type)
     {
         if (_type != Define.VoidEventType.OnChangeBattleInfo) return;
+        if (Managers.Game.state != Define.GameState.BattleProgress) return;
+
         if (Managers.Game.battleInfo.armyCurrentHP == 0)
+        {
+            Managers.Game.state = Define.GameState.BattleAfter;
             Debug.Log("¿˚∆¿¿Ã ¿Ã∞ÂΩ¿¥œ¥Ÿ.");
+        }
+
         if (Managers.Game.battleInfo.enemyCurrentHP == 0)
+        {
+            Managers.Game.state = Define.GameState.BattleAfter;
             Debug.Log("æ∆±∫∆¿¿Ã ¿Ã∞ÂΩ¿¥œ¥Ÿ.");
+        }
     }
 
     public override void SceneEvent(int _eventIndex, Action _callback = null)
@@ -268,6 +277,7 @@ public class StageScene : BaseScene
             case 0:
                 CreateArmyBattleEntities();
                 CreateEnemyBattleEntities();
+                Managers.Game.battleInfo.StartStage();
                 break;
 
             case 1:

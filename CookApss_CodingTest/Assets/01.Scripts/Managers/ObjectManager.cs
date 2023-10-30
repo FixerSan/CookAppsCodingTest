@@ -40,7 +40,7 @@ public class ObjectManager
             return armyBattleEntityTrnas;
         }
     }
-    public HashSet<BattleEntityController> Enemys { get; } = new HashSet<BattleEntityController>();
+    public List<BattleEntityController> Enemys { get; } = new List<BattleEntityController>();
 
     private Transform enemyBattleEntityTrnas;
     public Transform EnemyBattleEntityTrnas
@@ -60,7 +60,7 @@ public class ObjectManager
             return enemyBattleEntityTrnas;
         }
     }
-    public HashSet<BattleEntityController> Armys { get; } = new HashSet<BattleEntityController>();
+    public List<BattleEntityController> Armys { get; } = new List<BattleEntityController>();
 
     public BattleEntityController SpawnArmyBattleEntity(Define.BattleEntity _entity, int _level,Vector2 _position = new Vector2())
     {
@@ -77,8 +77,8 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Zero.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Zero.Die());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
+                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Zero.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
@@ -91,8 +91,8 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.One.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.One.Die());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
+                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.One.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
@@ -105,8 +105,8 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Two.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Two.Die());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
+                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Two.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
@@ -119,8 +119,8 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Three.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Three.Die());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
+                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Three.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
@@ -133,8 +133,8 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Four.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Four.Die());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
+                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Four.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
@@ -146,8 +146,8 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Five.SkillCast());
-                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Five.Die());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
+                states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Five.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
@@ -182,7 +182,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Zero.SkillCast());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
@@ -196,7 +196,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.One.SkillCast());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
@@ -210,7 +210,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Two.SkillCast());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
@@ -224,7 +224,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Three.SkillCast());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
@@ -238,7 +238,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Four.SkillCast());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
@@ -251,7 +251,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
-                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Five.SkillCast());
+                states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 

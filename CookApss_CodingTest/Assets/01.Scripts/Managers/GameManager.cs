@@ -73,6 +73,9 @@ public class BattleInfo
     public bool isFastSpeed;
     public float time;
 
+    public List<BattleEntityController> battleMVPPoints;
+    public int allBattlePoint = 0;
+
     public bool UseBattleEntity(BattleEntityData _data)
     {
         if (nowUseBattleEntityCount == isCanUseBattleEntityCount) return false;
@@ -104,7 +107,6 @@ public class BattleInfo
 
         return false;
     }
-
     public void UnUseBattleEntity(BattleEntityData _data)
     {
         nowUseBattleEntityCount--;
@@ -138,7 +140,6 @@ public class BattleInfo
             }
         }
     }
-
     public void UnUseAllBattleEntity()
     {
         armyFront = new BattleEntityData[3];
@@ -150,7 +151,6 @@ public class BattleInfo
 
         UpdateUI();
     }
-
     private void SetArmyBattleForceValue()
     {
         //개인 특성을 추가 한다면 여기에 기능 추가
@@ -187,7 +187,6 @@ public class BattleInfo
         armybattleForce = armyAttackForce + armyMaxHP;
         UpdateUI();
     }
-
     public void SetStageData(int _UID)
     {
         currentStage = Managers.Data.GetStageData(_UID);
@@ -229,8 +228,50 @@ public class BattleInfo
 
         enemybattleForce = enemyMaxHP + enemyAttackForce;
     }
+    public void StartStage()
+    {
+        armyCurrentHP = armyMaxHP;
+        enemyCurrentHP = enemyMaxHP;
 
-    public void SetTeamHP(VoidEventType _type)
+        battleMVPPoints.Clear();
+        battleMVPPoints = Managers.Object.Armys;
+        UpdateUI();
+    }   
+
+    public void UpdateMVPPoints()
+    {
+        List<BattleEntityController> tempList = new List<BattleEntityController>();
+        bool[] isChecked = new bool[Managers.Object.Armys.Count];
+        for (int i = 0; i < isChecked.Length; i++)
+            isChecked[i] = false;
+        int bestPoint = 0;
+        int bestIndex = -1;
+
+        for (int i = 0; i < Managers.Object.Armys.Count; i++)
+        {
+            bestPoint = 0;
+            for (int j = 0; j < Managers.Object.Armys.Count; j++)
+            {
+                if (isChecked[j]) continue;
+                if(bestPoint < Managers.Object.Armys[j].mvpPoint)
+                {
+                    bestPoint = Managers.Object.Armys[j].mvpPoint;
+                    bestIndex = j;
+                }
+            }
+            isChecked[bestIndex] = true;
+            tempList.Add(Managers.Object.Armys[bestIndex]);
+        }
+
+        battleMVPPoints = tempList;
+        allBattlePoint = 0;
+
+        for (int i = 0; i < battleMVPPoints.Count; i++)
+            allBattlePoint += battleMVPPoints[i].mvpPoint;
+
+        UpdateUI();
+    }
+    public void UpdateTeamHP(VoidEventType _type)
     {
         if (_type != VoidEventType.OnChangeControllerStatus) return;
         armyCurrentHP = 0;
@@ -241,27 +282,16 @@ public class BattleInfo
             enemyCurrentHP += item.status.CurrentHP;
         UpdateUI();
     }
-
-    public void StartStage()
-    {
-        armyCurrentHP = armyMaxHP;
-        enemyCurrentHP = enemyMaxHP;
-        UpdateUI();
-    }
-
     public void ChangeFastSpeed()
     {
         isFastSpeed = !isFastSpeed;
         if (isFastSpeed) Time.timeScale = 1.5f;
         else Time.timeScale = 1.0f;
     }
-
     public void UpdateUI()
     {
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattleInfo);
     }
-
-
     public void CheckTime()
     {
         if (Managers.Game.state == GameState.BattleProgress)
@@ -274,7 +304,6 @@ public class BattleInfo
             }
         }
     }
-
     public void TimeOver()
     {
 
@@ -296,8 +325,9 @@ public class BattleInfo
 
         isCanUseBattleEntityCount = 4;
         specialties = new Dictionary<string, int>();
+        battleMVPPoints = new List<BattleEntityController>();
 
-        Managers.Event.OnVoidEvent -= SetTeamHP;
-        Managers.Event.OnVoidEvent += SetTeamHP;
+        Managers.Event.OnVoidEvent -= UpdateTeamHP;
+        Managers.Event.OnVoidEvent += UpdateTeamHP;
     }
 }

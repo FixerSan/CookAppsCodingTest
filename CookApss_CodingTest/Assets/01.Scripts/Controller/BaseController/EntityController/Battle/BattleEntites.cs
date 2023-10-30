@@ -14,7 +14,8 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual IEnumerator AttackRoutine()
     {
-        Managers.Battle.AttackCalculation(controller, controller.attackTarget);
+        Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { controller.mvpPoint += _damage; });
+        Managers.Game.battleInfo.UpdateMVPPoints();
         yield return new WaitForSeconds(1);
         controller.routines.Remove("attack");
         controller.ChangeState(Define.BattleEntityState.Follow);
@@ -24,6 +25,7 @@ public abstract class BattleEntity : IAttackable, IHittable
     {
         controller.GetDamage(_damage);
     }
+
     public virtual void GetDamage(int _damage)
     {
         controller.status.CurrentHP -= _damage;
@@ -73,12 +75,30 @@ public abstract class BattleEntity : IAttackable, IHittable
         return false;
     }
 
+
+    public virtual bool CheckCanUseSkill()
+    {
+        if (controller.currentSkillCooltime <= 0)
+        {
+            controller.currentSkillCooltime = data.skillCooltime;
+            controller.ChangeState(Define.BattleEntityState.SkillCast);
+            return true;
+        }
+        else return false;
+    }
+
+    public abstract void Skill();
 }
 
 namespace BattleEntites
 {
     public class Zero : BattleEntity
     {
+        public override void Skill()
+        {
+
+        }
+
         public Zero(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -88,15 +108,26 @@ namespace BattleEntites
 
     public class One : BattleEntity
     {
+        public override void Skill()
+        {
+
+        }
+
         public One(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
             data = _data;
         }
+
     }
 
     public class Two : BattleEntity
     {
+
+        public override void Skill()
+        {
+
+        }
         public Two(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -106,6 +137,11 @@ namespace BattleEntites
 
     public class Three : BattleEntity
     {
+
+        public override void Skill()
+        {
+
+        }
         public Three(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -115,6 +151,11 @@ namespace BattleEntites
 
     public class Four : BattleEntity
     {
+
+        public override void Skill()
+        {
+
+        }
         public Four (BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
@@ -124,6 +165,11 @@ namespace BattleEntites
 
     public class Five : BattleEntity
     {
+
+        public override void Skill()
+        {
+
+        }
         public Five(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;

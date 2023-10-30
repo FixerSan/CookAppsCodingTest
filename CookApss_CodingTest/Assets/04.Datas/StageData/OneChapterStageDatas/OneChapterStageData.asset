@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: OneChapter
-  m_EditorClassIdentifier: Assembly-CSharp::StageDatas
+  m_Script: {fileID: 11500000, guid: 488a1aefe8d678644bffd2142b370eb3, type: 3}
+  m_Name: OneChapterStageData
+  m_EditorClassIdentifier: 
   normal:
   - {fileID: 11400000, guid: 7c708bbc6789d1345a1ba65162d1116c, type: 2}
   hard: []

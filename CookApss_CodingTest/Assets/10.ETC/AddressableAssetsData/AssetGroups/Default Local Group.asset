@@ -102,13 +102,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
-  - m_GUID: 3bb03d5201b91ae44b99693a4e1616f2
+  - m_GUID: 5ff3308a72ec4bb4bb43cadbb9fedbc1
     m_Address: OneChapterStageData.Data
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
   - m_GUID: 420278c7cb281f645b3cb9815ea48d7a
     m_Address: UIScene_Stage.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 707126bfe0fd06b44b616cccde5aed0b
+    m_Address: Slot_MVPPoint.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
