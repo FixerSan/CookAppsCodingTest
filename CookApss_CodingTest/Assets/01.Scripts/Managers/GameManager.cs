@@ -367,7 +367,7 @@ public class BattleInfo
 
             else clearStar = 1;
 
-            Managers.UI.ShowPopupUI<UIPopup_Result>("").Init(Define.GameResult.Victory);
+            Managers.UI.ShowPopupUI<UIPopup_Result>().Init(Define.GameResult.Victory);
             Managers.Screen.FadeOut(0.5f);
         });
     }
@@ -377,11 +377,10 @@ public class BattleInfo
         for (int i = 0; i < Managers.Object.Enemys.Count; i++)
             Managers.Object.Enemys[i].ChangeState(BattleEntityState.EndBattle);
         yield return new WaitForSeconds(2);
-
         Managers.Screen.FadeIn(0.5f, () =>
         {
             BaseEndStage();
-            Managers.UI.ShowPopupUI<UIPopup_Result>("").Init(Define.GameResult.Lose);
+            Managers.UI.ShowPopupUI<UIPopup_Result>().Init(Define.GameResult.Lose);
             Managers.Screen.FadeOut(0.5f);
         });
     }

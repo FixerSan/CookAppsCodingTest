@@ -14,7 +14,8 @@ public class UIScene_Stage : UIScene
         BindText(typeof(Texts));
         BindImage(typeof(Images));
         BindObject(typeof(Objects));
-
+        GetButton((int)Buttons.Button_AutoSkill).interactable = !Managers.Game.battleInfo.isAutoSkill;
+        GetButton((int)Buttons.Button_FastSpeed).interactable = !Managers.Game.battleInfo.isFastSpeed;
         BindEvent(GetButton((int)Buttons.Button_FastSpeed).gameObject, () => 
         {
             Managers.Game.battleInfo.ChangeFastSpeed();

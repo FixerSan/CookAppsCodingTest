@@ -59,7 +59,6 @@ public class UIToast : UIBase
     {
         GetText((int)Texts.Text_Description).text = string.Empty;
         GetText((int)Texts.Text_Description).color = Color.white;
-        GetText((int)Texts.Text_Description).color = Color.white;
         GetText((int)Texts.Text_Description).rectTransform.DOAnchorPosY(280, 0);
     }
 }

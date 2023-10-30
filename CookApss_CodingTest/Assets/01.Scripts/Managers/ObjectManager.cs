@@ -79,7 +79,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Zero.EndBattle());
+                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
@@ -93,7 +93,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.One.EndBattle());
+                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
@@ -107,7 +107,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Two.EndBattle());
+                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
@@ -121,7 +121,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Three.EndBattle());
+                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
@@ -135,7 +135,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Four.EndBattle());
+                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
@@ -148,7 +148,7 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.Attack, new BattleEntityStates.Base.Attack());
                 states.Add(Define.BattleEntityState.SkillCast, new BattleEntityStates.Base.SkillCast());
                 states.Add(Define.BattleEntityState.Die, new BattleEntityStates.Base.Die());
-                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Five.EndBattle());
+                states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);

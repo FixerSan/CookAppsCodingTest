@@ -73,8 +73,11 @@ public class ScreenManager
     public void SkillScreen()
     {
         isSkillCasting = true;
-        Debug.Log("스킬 스크린 실행 됨");
-        Managers.Routine.StartCoroutine(CameraController.SkillScreenRoutine(() => { isSkillCasting = false; Debug.Log("스킬 스크린 종료 됨");
+        Managers.UI.SkillScreen.gameObject.SetActive(true);
+        Managers.UI.ShowToast("Use Skill");
+        Managers.Routine.StartCoroutine(CameraController.SkillScreenRoutine(() => 
+        { 
+            isSkillCasting = false; Managers.UI.SkillScreen.gameObject.SetActive(false);
         }));
     }
 }

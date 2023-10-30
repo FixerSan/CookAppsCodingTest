@@ -38,6 +38,26 @@ public class UIManager
         }
     }
 
+    private CanvasGroup skillScreen;
+    public CanvasGroup SkillScreen
+    {
+        get
+        {
+            if (skillScreen == null)
+            {
+                GameObject go = GameObject.Find("@SkillScreen");
+                if (go == null)
+                {
+                    go = Managers.Resource.Instantiate("SkillScreen");
+                    go.name = "@SkillScreen";
+                    UnityEngine.Object.DontDestroyOnLoad(go);
+                    blackPanel = go.GetOrAddComponent<CanvasGroup>();
+                }
+            }
+            return blackPanel;
+        }
+    }
+
     public GameObject Root
     {
         get
