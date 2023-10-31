@@ -1,3 +1,4 @@
+using BattleEntityStates.Base;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,14 +11,14 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual bool CheckAttack()
     {
-        if (controller.status.currentAttackCycle > 0)
+        if (controller.status.checkAttackTime > 0)
         {
-            controller.status.currentAttackCycle -= Time.deltaTime;
-            if (controller.status.currentAttackCycle <= 0)
-                controller.status.currentAttackCycle = 0;
+            controller.status.checkAttackTime -= Time.deltaTime;
+            if (controller.status.checkAttackTime <= 0)
+                controller.status.checkAttackTime = 0;
         }
         if (controller.attackTarget == null) return false;
-        if (controller.status.currentAttackCycle > 0) return false;
+        if (controller.status.checkAttackTime > 0) return false;
         if (controller.state != Define.BattleEntityState.Follow) return false;
         if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) < data.canAttackDistance)
         {
@@ -34,7 +35,7 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual IEnumerator AttackRoutine()
     {
-        controller.status.currentAttackCycle = data.attackCycle;
+        controller.status.checkAttackTime = controller.status.currentAttackCycle;
         Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { controller.mvpPoint += _damage; });
         Managers.Game.battleInfo.UpdateMVPPoints();
         yield return new WaitForSeconds(1);
@@ -49,9 +50,13 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual void GetDamage(int _damage)
     {
+        if(controller.status.buff.CheckCanMiss())
+        {
+            Managers.UI.MakeWorldText("Miss", controller.transform.position + controller.textOffset, Define.TextType.Damage);
+            return;
+        }
         controller.status.CurrentHP -= _damage;
-        Vector2 damageTextPos = Camera.main.WorldToScreenPoint(controller.transform.position) + (Vector3)controller.damageTextOffset;
-        Managers.Resource.Instantiate("UIPopup_DamageText").GetOrAddComponent<UIPopup_DamageText>().Init(_damage, damageTextPos);
+        Managers.UI.MakeWorldText(_damage.ToString(), controller.transform.position + controller.textOffset, Define.TextType.Damage);
         if(controller.status.CurrentHP <= 0)
         {
             controller.status.CurrentHP = 0;
@@ -124,12 +129,11 @@ public abstract class BattleEntity : IAttackable, IHittable
     }
 
     public abstract void Skill();
-    public void BaseSkill()
+    public void BaseSkill(BattleEntityData _data)
     {
         controller.StopAllRoutine();
-        Managers.Screen.SkillScreen();
+        Managers.Screen.SkillScreen(_data);
         controller.ChangeStateWithDelay(Define.BattleEntityState.Follow, 2);
-        controller.status.currentSkillCooltime = data.skillCooltime;
     }
 }
 
@@ -139,7 +143,7 @@ namespace BattleEntites
     {
         public override void Skill()
         {
-            BaseSkill();
+            BaseSkill(controller.entity.data);
             for (int i = 0; i < Managers.Object.Armys.Count; i++)
             {
                 Managers.Object.Armys[i].SetBuff_PlusSpeed(3f,Managers.Object.Armys[i].status.currentAttackCycle * 0.25f);
@@ -157,7 +161,11 @@ namespace BattleEntites
     {
         public override void Skill()
         {
-            BaseSkill();
+            BaseSkill(controller.entity.data);
+            for (int i = 0; i < Managers.Object.Armys.Count; i++)
+            {
+                Managers.Object.Armys[i].SetBuff_SetMissCount(3);
+            }
         }
 
         public Tank(BattleEntityController _controller, BattleEntityData _data)
@@ -172,7 +180,11 @@ namespace BattleEntites
     {
         public override void Skill()
         {
-            BaseSkill();
+            BaseSkill(controller.entity.data);
+            for (int i = 0; i < Managers.Object.Armys.Count; i++)
+            {
+                Managers.Object.Armys[i].Heal((int)((Managers.Object.Armys[i].status.maxHP - Managers.Object.Armys[i].status.CurrentHP) * 0.25f));
+            }
         }
 
         public Wizard(BattleEntityController _controller, BattleEntityData _data)
@@ -187,7 +199,7 @@ namespace BattleEntites
 
         public override void Skill()
         {
-            BaseSkill();
+            BaseSkill(controller.entity.data);
             Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
@@ -203,7 +215,7 @@ namespace BattleEntites
 
         public override void Skill()
         {
-            BaseSkill();
+            BaseSkill(controller.entity.data);
             Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
@@ -219,7 +231,7 @@ namespace BattleEntites
 
         public override void Skill()
         {
-            BaseSkill();
+            BaseSkill(controller.entity.data);
             Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 

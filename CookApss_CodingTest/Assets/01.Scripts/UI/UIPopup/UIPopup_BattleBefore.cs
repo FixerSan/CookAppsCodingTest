@@ -20,7 +20,7 @@ public class UIPopup_BattleBefore : UIPopup
         Managers.Event.OnVoidEvent += OnChangeBattleInfo;
         BindEvent(GetButton((int)Buttons.Button_Clear).gameObject, Managers.Game.battleInfo.UnUseAllBattleEntity );
         BindEvent(GetButton((int)Buttons.Button_ClosePopup).gameObject, () => { Managers.UI.ClosePopupUI(this); });
-        BindEvent(GetButton((int)Buttons.Button_Start).gameObject, () => { Managers.Scene.LoadScene(Define.Scene.Stage); });
+        BindEvent(GetButton((int)Buttons.Button_Start).gameObject, () => { CheckStart(); });
 
         for (int i = 0; i < Managers.Data.playerData.hasEntites.Count; i++)
             CreateCanUseSlot(Managers.Data.playerData.hasEntites[i].UID, Managers.Data.playerData.hasEntites[i].level);
@@ -137,6 +137,34 @@ public class UIPopup_BattleBefore : UIPopup
                 slot.Init(Managers.Game.battleInfo.enemyFront[i], UISlot_UseBattleEntity.SlotType.Enemy);
             }
         }
+
+        for (int i = 0; i < Managers.Game.battleInfo.enemyCenter.Length; i++)
+        {
+            if (Managers.Game.battleInfo.enemyCenter[i] != null)
+            {
+                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_EnemyBattleEntitySpace_Center).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
+                slot.Init(Managers.Game.battleInfo.enemyCenter[i], UISlot_UseBattleEntity.SlotType.Enemy);
+            }
+        }
+
+        for (int i = 0; i < Managers.Game.battleInfo.enemyRear.Length; i++)
+        {
+            if (Managers.Game.battleInfo.enemyRear[i] != null)
+            {
+                UISlot_UseBattleEntity slot = Managers.Resource.Instantiate("Slot_UseBattleEntity", GetImage((int)Images.Image_EnemyBattleEntitySpace_Rear).transform).GetOrAddComponent<UISlot_UseBattleEntity>();
+                slot.Init(Managers.Game.battleInfo.enemyRear[i], UISlot_UseBattleEntity.SlotType.Enemy);
+            }
+        }
+    }
+
+    public void CheckStart()
+    {
+        if(Managers.Game.battleInfo.nowUseBattleEntityCount == 0)
+        {
+            Managers.UI.ShowToast("You have to put in a unit.");
+            return;
+        }
+        Managers.Scene.LoadScene(Define.Scene.Stage);
     }
 
     private enum Buttons

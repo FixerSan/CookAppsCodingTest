@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 1-1
-  m_EditorClassIdentifier: Assembly-CSharp::StageData
-  UID: 1001
-  stageName: 1-1
+  m_Script: {fileID: 11500000, guid: 1a9c436b07ee0ed4fb4734f30f40f532, type: 3}
+  m_Name: 1-2
+  m_EditorClassIdentifier: 
+  UID: 1002
+  stageName: 1-2
   stageState: 0
   oneStarReward: 0
   twoStarReward: 0
   threeStarReward: 0
   clearReward: 0
-  frontEnemyUIDs: 030000000400000005000000
+  frontEnemyUIDs: 030000000300000003000000
   frontEnemyLevels: 010000000100000001000000
-  centerEnemyUIDs: 
-  centerEnemyLevels: 
-  rearEnemyUIDs: 
-  rearEnemyLevels: 
+  centerEnemyUIDs: 040000000400000004000000
+  centerEnemyLevels: 010000000100000001000000
+  rearEnemyUIDs: 050000000500000005000000
+  rearEnemyLevels: 010000000100000001000000

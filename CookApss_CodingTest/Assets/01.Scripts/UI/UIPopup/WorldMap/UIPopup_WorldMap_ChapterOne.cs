@@ -15,6 +15,12 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
             Managers.Game.battleInfo.SetStageData(1001);
             Managers.UI.ShowPopupUI<UIPopup_BattleBefore>(); 
         });
+        BindEvent(GetButton((int)Buttons.Button_StageOne_Two).gameObject, () =>
+        {
+
+            Managers.Game.battleInfo.SetStageData(1002);
+            Managers.UI.ShowPopupUI<UIPopup_BattleBefore>();
+        });
         BindEvent(GetButton((int)Buttons.Button_ClosePopup).gameObject, () => { Managers.UI.ClosePopupUI(this); });
 
         return true;
@@ -22,6 +28,6 @@ public class UIPopup_WorldMap_ChapterOne : UIPopup
 
     private enum Buttons
     {
-        Button_StageOne_One, Button_ClosePopup
+        Button_StageOne_One, Button_StageOne_Two, Button_ClosePopup
     }
 }

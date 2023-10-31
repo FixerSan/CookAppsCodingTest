@@ -20,12 +20,12 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     public Transform moveTarget;
 
 
-    private bool isDead;
+    public bool isDead;
     private bool init = false;
 
     public int mvpPoint;
 
-    public Vector2 damageTextOffset;
+    public Vector3 textOffset;
 
     public void Init(BattleEntity _entity, Dictionary<BattleEntityState, State<BattleEntityController>> _states, BattleEntityStatus _status, BattleEntityType _entityType)
     {
@@ -39,9 +39,6 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         routines = new Dictionary<string, Coroutine>();
         stateMachine = new StateMachine<BattleEntityController>(this, states[BattleEntityState.Idle]);
 
-        status.currentSkillCooltime = _entity.data.skillCooltime;
-        status.currentAttackForce = _entity.data.attackForce;
-        status.currentAttackCycle = 0;
         mvpPoint = 0;
 
         UIHPBar hpBar =  Managers.Resource.Instantiate("UIHPbar", _pooling:true).GetOrAddComponent<UIHPBar>();
@@ -148,9 +145,23 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         routines.Remove("ChangeStateWithDelay");
     }
 
+    public void Heal(int _healValue)
+    {
+        if (status.CurrentHP >= status.maxHP)
+            return;
+        status.CurrentHP += _healValue;
+        Managers.UI.MakeWorldText($"+ {_healValue}", transform.position + textOffset, TextType.Heal);
+    }
+
     public void SetBuff_PlusSpeed(float _time, float _plusAttackSpeed)
     {
         status.buff.StartPlusAttackSpeed(_time, _plusAttackSpeed);
+        Managers.UI.MakeWorldText($"AttackSpeed + 25%", transform.position + textOffset, TextType.Normal);
+    }
+
+    public void SetBuff_SetMissCount(int _count)
+    {
+        status.buff.SetMissCount(_count);
     }
 
     public void Update()

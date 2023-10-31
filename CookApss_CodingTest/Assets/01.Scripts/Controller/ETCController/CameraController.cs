@@ -119,6 +119,8 @@ public class CameraController : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = currentTime;
+        Managers.UI.SkillScreen.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.5f);
         _callback?.Invoke();
     }
 

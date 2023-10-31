@@ -5,12 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class BattleBuff 
 {
+    public BattleEntityController controller;
     public BattleEntityStatus status;
     public bool isPlusAttackSpeed;
     public float currentPlusAttackSpeedTime;
     public float plusAttackSpeed;
     public bool isCanMiss;
-    public int isCanMissCount;
+    public int canMissCount;
     public float checkTime;
 
     public void CheckBuff()
@@ -20,7 +21,7 @@ public class BattleBuff
 
     public void CheckPlusAttackSpeed()
     {
-        if (isPlusAttackSpeed) return;
+        if (!isPlusAttackSpeed) return;
 
         currentPlusAttackSpeedTime -= Time.deltaTime;
         if (currentPlusAttackSpeedTime <= 0)
@@ -34,7 +35,7 @@ public class BattleBuff
         isPlusAttackSpeed = true;
         currentPlusAttackSpeedTime = _time;
         plusAttackSpeed = _plusAttackSpeed;
-        status.currentAttackCycle += plusAttackSpeed;
+        status.currentAttackCycle -= _plusAttackSpeed;
     }
 
     public void EndPlusAttackSpeed()
@@ -42,18 +43,37 @@ public class BattleBuff
         isPlusAttackSpeed = false;
         currentPlusAttackSpeedTime = 0;
 
-        status.currentAttackCycle -= plusAttackSpeed;
+        status.currentAttackCycle += plusAttackSpeed;
         plusAttackSpeed = 0;
     }
 
-    public BattleBuff(BattleEntityStatus _status)
+    public void SetMissCount(int _count)
     {
+        isCanMiss = true;
+        canMissCount += _count;
+        Managers.UI.MakeWorldText("MISS Count + 3", controller.transform.position + controller.textOffset, Define.TextType.Normal);
+    }
+
+    public bool CheckCanMiss()
+    {
+        if(isCanMiss)
+        {
+            canMissCount--;
+            if (canMissCount <= 0)
+                isCanMiss = false;
+        }
+        return isCanMiss;
+    }
+
+    public BattleBuff(BattleEntityController _controller, BattleEntityStatus _status)
+    {
+        controller = _controller;
         status = _status;
         isPlusAttackSpeed = false;
         currentPlusAttackSpeedTime = 0;
         plusAttackSpeed = 0;
         isCanMiss = false; 
-        isCanMissCount = 0;
+        canMissCount = 0;
         checkTime = 0; ;
     }
 }

@@ -82,7 +82,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Warrior(battleEntityController, data);
                 break;
 
@@ -96,7 +95,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Tank(battleEntityController, data);
                 break;
 
@@ -110,7 +108,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Wizard(battleEntityController, data);
                 break;
 
@@ -124,7 +121,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Three(battleEntityController, data);
                 break;
 
@@ -138,7 +134,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Four(battleEntityController, data);
                 break;
             case Define.BattleEntity.EnemyThree:
@@ -151,10 +146,10 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Five(battleEntityController, data);
                 break;
         }
+        status = new BattleEntityStatus(battleEntityController, data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed, data.attackCycle);
 
         if (battleEntityController != null)
         {
@@ -187,7 +182,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Warrior(battleEntityController, data);
                 break;
 
@@ -201,7 +195,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Tank(battleEntityController, data);
                 break;
 
@@ -215,7 +208,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Wizard(battleEntityController, data);
                 break;
 
@@ -229,7 +221,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Three(battleEntityController, data);
                 break;
 
@@ -243,7 +234,6 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Four(battleEntityController, data);
                 break;
             case Define.BattleEntity.EnemyThree:
@@ -256,10 +246,11 @@ public class ObjectManager
                 states.Add(Define.BattleEntityState.EndBattle, new BattleEntityStates.Base.EndBattle());
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
-                status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Five(battleEntityController, data);
                 break;
         }
+        status = new BattleEntityStatus(battleEntityController,data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed, data.attackCycle);
+
 
         if (battleEntityController != null)
         {

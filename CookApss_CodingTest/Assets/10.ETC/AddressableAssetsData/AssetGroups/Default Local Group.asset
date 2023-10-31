@@ -143,7 +143,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Preload
   - m_GUID: bc59d70fa788c9545b964eb8eaa17a87
-    m_Address: UIPopup_DamageText.GameObject
+    m_Address: UIPopup_WorldText.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload

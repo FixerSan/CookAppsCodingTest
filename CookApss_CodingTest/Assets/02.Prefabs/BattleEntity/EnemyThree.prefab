@@ -127,16 +127,102 @@ MonoBehaviour:
     moveSpeed: 0
     currentAttackForce: 0
     currentAttackCycle: 0
-    isPlusAttackSpeed: 0
-    currentPlusAttackSpeedTime: 0
-    plusAttackSpeed: 0
-    isCanMiss: 0
-    isCanMissCount: 0
-    checkTime: 0
+    defaultAttackCycle: 0
+    checkAttackTime: 0
+    buff:
+      controller: {fileID: 0}
+      status:
+        maxHP: 0
+        attackForce: 0
+        skillCooltime: 0
+        currentSkillCooltime: 0
+        moveSpeed: 0
+        currentAttackForce: 0
+        currentAttackCycle: 0
+        defaultAttackCycle: 0
+        checkAttackTime: 0
+        buff:
+          controller: {fileID: 0}
+          status:
+            maxHP: 0
+            attackForce: 0
+            skillCooltime: 0
+            currentSkillCooltime: 0
+            moveSpeed: 0
+            currentAttackForce: 0
+            currentAttackCycle: 0
+            defaultAttackCycle: 0
+            checkAttackTime: 0
+            buff:
+              controller: {fileID: 0}
+              status:
+                maxHP: 0
+                attackForce: 0
+                skillCooltime: 0
+                currentSkillCooltime: 0
+                moveSpeed: 0
+                currentAttackForce: 0
+                currentAttackCycle: 0
+                defaultAttackCycle: 0
+                checkAttackTime: 0
+                buff:
+                  controller: {fileID: 0}
+                  status:
+                    maxHP: 0
+                    attackForce: 0
+                    skillCooltime: 0
+                    currentSkillCooltime: 0
+                    moveSpeed: 0
+                    currentAttackForce: 0
+                    currentAttackCycle: 0
+                    defaultAttackCycle: 0
+                    checkAttackTime: 0
+                    buff:
+                      controller: {fileID: 0}
+                      status:
+                        maxHP: 0
+                        attackForce: 0
+                        skillCooltime: 0
+                        currentSkillCooltime: 0
+                        moveSpeed: 0
+                        currentAttackForce: 0
+                        currentAttackCycle: 0
+                        defaultAttackCycle: 0
+                        checkAttackTime: 0
+                      isPlusAttackSpeed: 0
+                      currentPlusAttackSpeedTime: 0
+                      plusAttackSpeed: 0
+                      isCanMiss: 0
+                      canMissCount: 0
+                      checkTime: 0
+                  isPlusAttackSpeed: 0
+                  currentPlusAttackSpeedTime: 0
+                  plusAttackSpeed: 0
+                  isCanMiss: 0
+                  canMissCount: 0
+                  checkTime: 0
+              isPlusAttackSpeed: 0
+              currentPlusAttackSpeedTime: 0
+              plusAttackSpeed: 0
+              isCanMiss: 0
+              canMissCount: 0
+              checkTime: 0
+          isPlusAttackSpeed: 0
+          currentPlusAttackSpeedTime: 0
+          plusAttackSpeed: 0
+          isCanMiss: 0
+          canMissCount: 0
+          checkTime: 0
+      isPlusAttackSpeed: 0
+      currentPlusAttackSpeedTime: 0
+      plusAttackSpeed: 0
+      isCanMiss: 0
+      canMissCount: 0
+      checkTime: 0
   entityType: 0
   state: 0
   rb: {fileID: 0}
   attackTarget: {fileID: 0}
   moveTarget: {fileID: 0}
   mvpPoint: 0
-  damageTextOffset: {x: 0, y: 0}
+  textOffset: {x: 0, y: 1, z: 0}

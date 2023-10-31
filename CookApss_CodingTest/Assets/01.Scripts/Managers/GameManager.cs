@@ -208,11 +208,12 @@ public class BattleInfo
             enemyAttackForce += data.attackForce;
             enemyMaxHP += data.maxHP;
         }
+
         enemyCenter = new BattleEntityData[3];
         for (int i = 0; i < currentStage.centerEnemyUIDs.Length; i++)
         {
             BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.centerEnemyUIDs[i], currentStage.centerEnemyLevels[i]);
-            enemyFront[i] = data;
+            enemyCenter[i] = data;
             nowEnemyCount++;
             enemyAttackForce += data.attackForce;
             enemyMaxHP += data.maxHP;
@@ -222,7 +223,7 @@ public class BattleInfo
         for (int i = 0; i < currentStage.rearEnemyUIDs.Length; i++)
         {
             BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.rearEnemyUIDs[i], currentStage.rearEnemyLevels[i]);
-            enemyFront[i] = data;
+            enemyRear[i] = data;
             nowEnemyCount++;
             enemyAttackForce += data.attackForce;
             enemyMaxHP += data.maxHP;
@@ -337,11 +338,18 @@ public class BattleInfo
         armybattleForce = 0;
         Time.timeScale = 1.0f;
         for (int i = 0; i < Managers.Object.Armys.Count; i++)
+        {
             Managers.Object.Armys[i].StopAllRoutine();
+            Managers.Resource.Destroy(Managers.Object.Armys[i].gameObject);
+        }
         Managers.Object.Armys.Clear();
+        
 
         for (int i = 0; i < Managers.Object.Enemys.Count; i++)
+        {
             Managers.Object.Enemys[i].StopAllRoutine();
+            Managers.Resource.Destroy(Managers.Object.Enemys[i].gameObject);
+        }
         Managers.Object.Enemys.Clear();
     }
 

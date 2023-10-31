@@ -3,14 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIPopup_DamageText : UIBase
+public class UIPopup_WorldText : UIBase
 {
     public float fadeTime;
-    public void Init(int _damage , Vector2 _position)
+    public void Init(string _description , Vector2 _position, Define.TextType _type)
     {
         BindText(typeof(Texts));
-        GetText((int)Texts.Text_Damage).text = $"{_damage}";
-        GetText((int)Texts.Text_Damage).transform.position = _position;
+        GetText((int)Texts.Text_Damage).text = _description;
+        GetText((int)Texts.Text_Damage).transform.position = Camera.main.WorldToScreenPoint(_position);
+        
+        switch(_type)
+        {
+            case Define.TextType.Damage:
+                    GetText((int)Texts.Text_Damage).color = Color.red;
+                break;
+
+            case Define.TextType.Heal:
+                GetText((int)Texts.Text_Damage).color = Color.green;
+                break;
+
+            case Define.TextType.Normal:
+                GetText((int)Texts.Text_Damage).color = Color.white;
+                break;
+        }
         StartCoroutine(FadeOut());
     }
 
@@ -23,7 +38,7 @@ public class UIPopup_DamageText : UIBase
     {
         while (GetText((int)Texts.Text_Damage).color.a > 0)
         {
-            transform.position += Vector3.up * Time.deltaTime;
+            GetText((int)Texts.Text_Damage).transform.position += Vector3.up * Time.deltaTime;
             GetText((int)Texts.Text_Damage).color = new Color(GetText((int)Texts.Text_Damage).color.r, GetText((int)Texts.Text_Damage).color.g, GetText((int)Texts.Text_Damage).color.b, GetText((int)Texts.Text_Damage).color.a - Time.deltaTime / fadeTime);
             yield return null;
         }
@@ -35,4 +50,5 @@ public class UIPopup_DamageText : UIBase
     {
         Text_Damage
     }
+   
 }

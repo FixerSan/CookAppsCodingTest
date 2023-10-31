@@ -63,7 +63,7 @@
   "level": 1,
   "maxHP": 500,
   "attackForce": 100,
-  "skillCooltime": 5,
+  "skillCooltime": 10,
   "moveSpeed": 5,
   "canAttackDistance": 3,
   "attackCycle": 1
@@ -74,7 +74,7 @@
   "level": 2,
   "maxHP": 550,
   "attackForce": 110,
-  "skillCooltime": 5,
+  "skillCooltime": 10,
   "moveSpeed": 5,
   "canAttackDistance": 3,
   "attackCycle": 1
@@ -85,7 +85,7 @@
   "level": 3,
   "maxHP": 600,
   "attackForce": 120,
-  "skillCooltime": 5,
+  "skillCooltime": 10,
   "moveSpeed": 5,
   "canAttackDistance": 3,
   "attackCycle": 1
@@ -96,7 +96,7 @@
   "level": 4,
   "maxHP": 650,
   "attackForce": 130,
-  "skillCooltime": 5,
+  "skillCooltime": 10,
   "moveSpeed": 5,
   "canAttackDistance": 3,
   "attackCycle": 1
@@ -107,7 +107,7 @@
   "level": 5,
   "maxHP": 700,
   "attackForce": 140,
-  "skillCooltime": 5,
+  "skillCooltime": 10,
   "moveSpeed": 5,
   "canAttackDistance": 3,
   "attackCycle": 1
@@ -120,7 +120,7 @@
   "level": 1,
   "maxHP": 2000,
   "attackForce": 25,
-  "skillCooltime": 5,
+  "skillCooltime": 12,
   "moveSpeed": 5,
   "canAttackDistance": 0.6,
   "attackCycle": 1.25
@@ -131,7 +131,7 @@
   "level": 2,
   "maxHP": 2200,
   "attackForce": 50,
-  "skillCooltime": 5,
+  "skillCooltime": 12,
   "moveSpeed": 5,
   "canAttackDistance": 0.6,
   "attackCycle": 1.25
@@ -142,7 +142,7 @@
   "level": 3,
   "maxHP": 2400,
   "attackForce": 75,
-  "skillCooltime": 5,
+  "skillCooltime": 12,
   "moveSpeed": 5,
   "canAttackDistance": 0.6,
   "attackCycle": 1.25
@@ -153,7 +153,7 @@
   "level": 4,
   "maxHP": 2600,
   "attackForce": 100,
-  "skillCooltime": 5,
+  "skillCooltime": 12,
   "moveSpeed": 5,
   "canAttackDistance": 0.6,
   "attackCycle": 1.25
@@ -164,7 +164,7 @@
   "level": 5,
   "maxHP": 2800,
   "attackForce": 125,
-  "skillCooltime": 5,
+  "skillCooltime": 12,
   "moveSpeed": 5,
   "canAttackDistance": 0.6,
   "attackCycle": 1.25

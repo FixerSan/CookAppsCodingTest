@@ -109,17 +109,15 @@ public class UIManager
         }
     }
 
-    // 岿靛胶其捞胶 UI 积己
-    public T MakeWorldSpaceUI<T>(Transform _parent = null, string _name = null, bool _pooling = true) where T : UIBase
+    public UIPopup_WorldText MakeWorldText(string _description, Vector2 _position, Define.TextType _type)
     {
-        if (string.IsNullOrEmpty(_name))
-        {
-            _name = typeof(T).Name;
-        }
+        if (string.IsNullOrEmpty(_description))
+            return null;
 
-        GameObject go = Managers.Resource.Instantiate($"{_name}", _parent, _pooling);
-        go.transform.SetParent(_parent);
-        return go.GetOrAddComponent<T>();
+        GameObject go = Managers.Resource.Instantiate("UIPopup_WorldText", Root.transform, true);
+        UIPopup_WorldText text = go.GetOrAddComponent<UIPopup_WorldText>();
+        text.Init(_description, _position, _type);
+        return text;
     }
 
     // SceneUI 积己

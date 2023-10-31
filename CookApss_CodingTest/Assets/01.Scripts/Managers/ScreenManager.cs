@@ -70,14 +70,14 @@ public class ScreenManager
         Managers.Routine.StartCoroutine(CameraController.FadeInOut(_totalTile, () => { _callback?.Invoke(); }));
     }
 
-    public void SkillScreen()
+    public void SkillScreen(BattleEntityData _data)
     {
         isSkillCasting = true;
         Managers.UI.SkillScreen.gameObject.SetActive(true);
-        Managers.UI.ShowToast("Use Skill");
+        Managers.UI.ShowToast($"{_data.name} UseSkill");
         Managers.Routine.StartCoroutine(CameraController.SkillScreenRoutine(() => 
         { 
-            isSkillCasting = false; Managers.UI.SkillScreen.gameObject.SetActive(false);
+            isSkillCasting = false;  
         }));
     }
 }

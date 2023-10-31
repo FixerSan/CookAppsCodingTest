@@ -91,4 +91,9 @@ public class Define
     {
         PlusAttackSpeed
     }
+
+    public enum TextType
+    {
+        Damage, Heal, Normal
+    }
 }
