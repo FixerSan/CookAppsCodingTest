@@ -28,9 +28,9 @@ public class UISlot_StageEntity : UIBase
 
     public void CheckCooltime()
     {
-        GetImage((int)Images.Image_Cooltime).fillAmount = controller.currentSkillCooltime / controller.entity.data.skillCooltime;
-        GetText((int)Texts.Text_Cooltime).text = $"{(int)controller.currentSkillCooltime}";
-        if (controller.currentSkillCooltime == 0)
+        GetImage((int)Images.Image_Cooltime).fillAmount = controller.status.currentSkillCooltime / controller.entity.data.skillCooltime;
+        GetText((int)Texts.Text_Cooltime).text = $"{(int)controller.status.currentSkillCooltime}";
+        if (controller.status.currentSkillCooltime == 0)
         {
             GetText((int)Texts.Text_Cooltime).gameObject.SetActive(false);
             GetImage((int)Images.Image_Cooltime).gameObject.SetActive(false);

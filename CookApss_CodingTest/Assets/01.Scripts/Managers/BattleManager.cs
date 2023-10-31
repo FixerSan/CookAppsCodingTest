@@ -18,4 +18,16 @@ public class BattleManager
         _hiter.Hit(currentDamage);
         _damageCallback?.Invoke(currentDamage);
     }
+
+    public void AttackCalculation(int _damage, BattleEntityController _hiter, Action<int> _damageCallback = null)
+    {
+        int tempInt = UnityEngine.Random.Range(0, 101);
+        int currentDamage = _damage;
+
+        if (tempInt > 50)
+            currentDamage = (int)(currentDamage * criticalMultiplier);
+
+        _hiter.Hit(currentDamage);
+        _damageCallback?.Invoke(currentDamage);
+    }
 }

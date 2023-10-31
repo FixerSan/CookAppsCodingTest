@@ -16,17 +16,16 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
     public Rigidbody2D rb;
     public Dictionary<string , Coroutine> routines;
 
-    public Transform moveTarget;
     public BattleEntityController attackTarget;
+    public Transform moveTarget;
+
 
     private bool isDead;
     private bool init = false;
 
-
-    public float currentSkillCooltime;
-    public int currentAttackForce;
-    public float currentAttackCycle;
     public int mvpPoint;
+
+    public Vector2 damageTextOffset;
 
     public void Init(BattleEntity _entity, Dictionary<BattleEntityState, State<BattleEntityController>> _states, BattleEntityStatus _status, BattleEntityType _entityType)
     {
@@ -40,9 +39,9 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         routines = new Dictionary<string, Coroutine>();
         stateMachine = new StateMachine<BattleEntityController>(this, states[BattleEntityState.Idle]);
 
-        currentSkillCooltime = _entity.data.skillCooltime;
-        currentAttackForce = _entity.data.attackForce;
-        currentAttackCycle = 0;
+        status.currentSkillCooltime = _entity.data.skillCooltime;
+        status.currentAttackForce = _entity.data.attackForce;
+        status.currentAttackCycle = 0;
         mvpPoint = 0;
 
         UIHPBar hpBar =  Managers.Resource.Instantiate("UIHPbar", _pooling:true).GetOrAddComponent<UIHPBar>();
@@ -149,10 +148,16 @@ public class BattleEntityController : EntityController, IAttackable, IHittable
         routines.Remove("ChangeStateWithDelay");
     }
 
+    public void SetBuff_PlusSpeed(float _time, float _plusAttackSpeed)
+    {
+        status.buff.StartPlusAttackSpeed(_time, _plusAttackSpeed);
+    }
+
     public void Update()
     {
         if (!init) return;
         stateMachine.UpdateState();
+        status.buff.CheckBuff();
     }
 
     public void OnDisable()

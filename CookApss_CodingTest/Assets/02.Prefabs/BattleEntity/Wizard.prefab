@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1503148667890791707}
   - component: {fileID: -3632750011989820493}
   m_Layer: 0
-  m_Name: One
+  m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,12 +121,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     maxHP: 0
-    currentHP: 0
     attackForce: 0
     skillCooltime: 0
     currentSkillCooltime: 0
     moveSpeed: 0
+    currentAttackForce: 0
+    currentAttackCycle: 0
+    isPlusAttackSpeed: 0
+    currentPlusAttackSpeedTime: 0
+    plusAttackSpeed: 0
+    isCanMiss: 0
+    isCanMissCount: 0
+    checkTime: 0
   entityType: 0
   state: 0
   rb: {fileID: 0}
-  target: {fileID: 0}
+  attackTarget: {fileID: 0}
+  moveTarget: {fileID: 0}
+  mvpPoint: 0
+  damageTextOffset: {x: 0, y: 0}

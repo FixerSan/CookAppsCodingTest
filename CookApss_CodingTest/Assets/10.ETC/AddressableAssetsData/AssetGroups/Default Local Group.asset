@@ -33,7 +33,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Preload
   - m_GUID: 422a3a16874f4f14eb1023a2ed9ad92a
-    m_Address: Zero.GameObject
+    m_Address: Warrior.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
@@ -68,27 +68,27 @@ MonoBehaviour:
     m_SerializedLabels:
     - Preload
   - m_GUID: 8bbc662c7289f794baaf024c8ab4dca1
-    m_Address: Five.GameObject
+    m_Address: EnemyThree.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
   - m_GUID: 38cc5f8db1339c44987eb78d69a4b47f
-    m_Address: Four.GameObject
+    m_Address: EnemyTwo.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
   - m_GUID: 8ebe6dfbd228fb7499a42bf58cab8935
-    m_Address: One.GameObject
+    m_Address: Wizard.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
   - m_GUID: a54ca7bd07f77c14ba5ee711e70208e3
-    m_Address: Three.GameObject
+    m_Address: EnemyOne.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
   - m_GUID: ad1b1b07cc90b9e469ab95aa1f866793
-    m_Address: Two.GameObject
+    m_Address: Tank.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
@@ -139,6 +139,11 @@ MonoBehaviour:
     - Preload
   - m_GUID: fd4d40f084145a34e9794b4975101451
     m_Address: UIToast.GameObject
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: bc59d70fa788c9545b964eb8eaa17a87
+    m_Address: UIPopup_DamageText.GameObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload

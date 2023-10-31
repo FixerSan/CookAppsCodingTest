@@ -21,6 +21,11 @@ public class BattleEntityStatus
     public float currentSkillCooltime;
     public int moveSpeed;
 
+    public int currentAttackForce;
+    public float currentAttackCycle;
+
+    public BattleBuff buff;
+
     public BattleEntityStatus(int _maxHP, int _currentHP, int _attackForce,  float _skillCooltime, float _currentSkillCooltime, int _moveSpeed)
     {
         maxHP = _maxHP;
@@ -29,5 +34,7 @@ public class BattleEntityStatus
         skillCooltime = _skillCooltime;
         currentSkillCooltime = _currentSkillCooltime;
         moveSpeed = _moveSpeed;
+
+        buff = new BattleBuff(this);
     }
 }

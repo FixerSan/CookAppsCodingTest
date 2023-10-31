@@ -82,12 +82,12 @@ public class DataManager
 
         for (int i = 0; i < Define.currentBattleEntityMaxLevel; i++)
         {
-            battleEntityStatusDatas[0].Add(_battleEntityStatusDatas.zero[i].level, _battleEntityStatusDatas.zero[i]);
-            battleEntityStatusDatas[1].Add(_battleEntityStatusDatas.one[i].level, _battleEntityStatusDatas.one[i]);
-            battleEntityStatusDatas[2].Add(_battleEntityStatusDatas.two[i].level, _battleEntityStatusDatas.two[i]);
-            battleEntityStatusDatas[3].Add(_battleEntityStatusDatas.three[i].level, _battleEntityStatusDatas.three[i]);
-            battleEntityStatusDatas[4].Add(_battleEntityStatusDatas.four[i].level, _battleEntityStatusDatas.four[i]);
-            battleEntityStatusDatas[5].Add(_battleEntityStatusDatas.five[i].level, _battleEntityStatusDatas.five[i]);
+            battleEntityStatusDatas[0].Add(_battleEntityStatusDatas.warrior[i].level, _battleEntityStatusDatas.warrior[i]);
+            battleEntityStatusDatas[1].Add(_battleEntityStatusDatas.wizard[i].level, _battleEntityStatusDatas.wizard[i]);
+            battleEntityStatusDatas[2].Add(_battleEntityStatusDatas.tank[i].level, _battleEntityStatusDatas.tank[i]);
+            battleEntityStatusDatas[3].Add(_battleEntityStatusDatas.enemyOne[i].level, _battleEntityStatusDatas.enemyOne[i]);
+            battleEntityStatusDatas[4].Add(_battleEntityStatusDatas.enemyTwo[i].level, _battleEntityStatusDatas.enemyTwo[i]);
+            battleEntityStatusDatas[5].Add(_battleEntityStatusDatas.enemyThree[i].level, _battleEntityStatusDatas.enemyThree[i]);
         }
     }
 
@@ -235,11 +235,11 @@ public class BattleEntityData : Data
 
 public class BattleEntityDatas : Data
 {
-    public BattleEntityData[] zero;
-    public BattleEntityData[] one;
-    public BattleEntityData[] two;
-    public BattleEntityData[] three;
-    public BattleEntityData[] four;
-    public BattleEntityData[] five;
+    public BattleEntityData[] warrior;
+    public BattleEntityData[] wizard;
+    public BattleEntityData[] tank;
+    public BattleEntityData[] enemyOne;
+    public BattleEntityData[] enemyTwo;
+    public BattleEntityData[] enemyThree;
 }
 

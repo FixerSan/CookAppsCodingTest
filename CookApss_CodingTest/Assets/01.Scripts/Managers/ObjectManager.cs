@@ -72,7 +72,7 @@ public class ObjectManager
         Dictionary<Define.BattleEntityState, State<BattleEntityController>> states = new Dictionary<BattleEntityState, State<BattleEntityController>>();
         switch (_entity)
         {
-            case Define.BattleEntity.Zero:
+            case Define.BattleEntity.Warrior:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -83,10 +83,10 @@ public class ObjectManager
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
-                battleEntity = new BattleEntites.Zero(battleEntityController, data);
+                battleEntity = new BattleEntites.Warrior(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.One:
+            case Define.BattleEntity.Tank:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -97,10 +97,10 @@ public class ObjectManager
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
-                battleEntity = new BattleEntites.One(battleEntityController, data);
+                battleEntity = new BattleEntites.Tank(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.Two:
+            case Define.BattleEntity.Wizard:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -111,10 +111,10 @@ public class ObjectManager
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
-                battleEntity = new BattleEntites.Two(battleEntityController, data);
+                battleEntity = new BattleEntites.Wizard(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.Three:
+            case Define.BattleEntity.EnemyOne:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -128,7 +128,7 @@ public class ObjectManager
                 battleEntity = new BattleEntites.Three(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.Four:
+            case Define.BattleEntity.EnemyTwo:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -141,7 +141,7 @@ public class ObjectManager
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Four(battleEntityController, data);
                 break;
-            case Define.BattleEntity.Five:
+            case Define.BattleEntity.EnemyThree:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -177,7 +177,7 @@ public class ObjectManager
         Dictionary<Define.BattleEntityState, State<BattleEntityController>> states = new Dictionary<BattleEntityState, State<BattleEntityController>>();
         switch (_entity)
         {
-            case Define.BattleEntity.Zero:
+            case Define.BattleEntity.Warrior:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -188,10 +188,10 @@ public class ObjectManager
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
-                battleEntity = new BattleEntites.Zero(battleEntityController, data);
+                battleEntity = new BattleEntites.Warrior(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.One:
+            case Define.BattleEntity.Tank:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -202,10 +202,10 @@ public class ObjectManager
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
-                battleEntity = new BattleEntites.One(battleEntityController, data);
+                battleEntity = new BattleEntites.Tank(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.Two:
+            case Define.BattleEntity.Wizard:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -216,10 +216,10 @@ public class ObjectManager
 
                 data = Managers.Data.GetBattleEntityData((int)_entity, _level);
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
-                battleEntity = new BattleEntites.Two(battleEntityController, data);
+                battleEntity = new BattleEntites.Wizard(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.Three:
+            case Define.BattleEntity.EnemyOne:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -233,7 +233,7 @@ public class ObjectManager
                 battleEntity = new BattleEntites.Three(battleEntityController, data);
                 break;
 
-            case Define.BattleEntity.Four:
+            case Define.BattleEntity.EnemyTwo:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());
@@ -246,7 +246,7 @@ public class ObjectManager
                 status = new BattleEntityStatus(data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed);
                 battleEntity = new BattleEntites.Four(battleEntityController, data);
                 break;
-            case Define.BattleEntity.Five:
+            case Define.BattleEntity.EnemyThree:
                 states.Add(Define.BattleEntityState.Idle, new BattleEntityStates.Base.Idle());
                 states.Add(Define.BattleEntityState.Move, new BattleEntityStates.Base.Move());
                 states.Add(Define.BattleEntityState.Follow, new BattleEntityStates.Base.Follow());

@@ -22,12 +22,12 @@ public class Define
     
     public enum BattleEntity
     {
-        Zero = 0,
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5
+        Warrior = 0,
+        Wizard = 1,
+        Tank = 2,
+        EnemyOne = 3,
+        EnemyTwo = 4,
+        EnemyThree = 5
     }
 
     public enum BattleEntityType
@@ -85,5 +85,10 @@ public class Define
     public enum Scene
     {
         Main, Stage
+    }
+
+    public enum Buff
+    {
+        PlusAttackSpeed
     }
 }

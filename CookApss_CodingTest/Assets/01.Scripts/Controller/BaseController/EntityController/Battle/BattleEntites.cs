@@ -10,14 +10,14 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual bool CheckAttack()
     {
-        if (controller.currentAttackCycle > 0)
+        if (controller.status.currentAttackCycle > 0)
         {
-            controller.currentAttackCycle -= Time.deltaTime;
-            if (controller.currentAttackCycle <= 0)
-                controller.currentAttackCycle = 0;
+            controller.status.currentAttackCycle -= Time.deltaTime;
+            if (controller.status.currentAttackCycle <= 0)
+                controller.status.currentAttackCycle = 0;
         }
         if (controller.attackTarget == null) return false;
-        if (controller.currentAttackCycle > 0) return false;
+        if (controller.status.currentAttackCycle > 0) return false;
         if (controller.state != Define.BattleEntityState.Follow) return false;
         if (Vector2.Distance(controller.attackTarget.transform.position, controller.transform.position) < data.canAttackDistance)
         {
@@ -34,7 +34,7 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual IEnumerator AttackRoutine()
     {
-        controller.currentAttackCycle = data.attackCycle;
+        controller.status.currentAttackCycle = data.attackCycle;
         Managers.Battle.AttackCalculation(controller, controller.attackTarget, (_damage)=> { controller.mvpPoint += _damage; });
         Managers.Game.battleInfo.UpdateMVPPoints();
         yield return new WaitForSeconds(1);
@@ -50,6 +50,8 @@ public abstract class BattleEntity : IAttackable, IHittable
     public virtual void GetDamage(int _damage)
     {
         controller.status.CurrentHP -= _damage;
+        Vector2 damageTextPos = Camera.main.WorldToScreenPoint(controller.transform.position) + (Vector3)controller.damageTextOffset;
+        Managers.Resource.Instantiate("UIPopup_DamageText").GetOrAddComponent<UIPopup_DamageText>().Init(_damage, damageTextPos);
         if(controller.status.CurrentHP <= 0)
         {
             controller.status.CurrentHP = 0;
@@ -93,17 +95,17 @@ public abstract class BattleEntity : IAttackable, IHittable
 
     public virtual bool CheckCanUseSkill()
     {
-        if(controller.currentSkillCooltime > 0)
+        if(controller.status.currentSkillCooltime > 0)
         {
-            controller.currentSkillCooltime -= Time.deltaTime;
-            if (controller.currentSkillCooltime <= 0)
-                controller.currentSkillCooltime = 0;
+            controller.status.currentSkillCooltime -= Time.deltaTime;
+            if (controller.status.currentSkillCooltime <= 0)
+                controller.status.currentSkillCooltime = 0;
         }
         if (Managers.Screen.isSkillCasting) return false;
         if (controller.entityType == Define.BattleEntityType.Enemy) 
         {
             if (controller.state != Define.BattleEntityState.Follow) return false;
-            if (controller.currentSkillCooltime <= 0)
+            if (controller.status.currentSkillCooltime <= 0)
             {
                 controller.ChangeState(Define.BattleEntityState.SkillCast);
                 return true;
@@ -113,7 +115,7 @@ public abstract class BattleEntity : IAttackable, IHittable
 
         if (!Managers.Game.battleInfo.isAutoSkill) return false;
         if (controller.state != Define.BattleEntityState.Follow) return false;
-        if (controller.currentSkillCooltime <= 0)
+        if (controller.status.currentSkillCooltime <= 0)
         {
             controller.ChangeState(Define.BattleEntityState.SkillCast);
             return true;
@@ -127,34 +129,38 @@ public abstract class BattleEntity : IAttackable, IHittable
         controller.StopAllRoutine();
         Managers.Screen.SkillScreen();
         controller.ChangeStateWithDelay(Define.BattleEntityState.Follow, 2);
-        controller.currentSkillCooltime = data.skillCooltime;
+        controller.status.currentSkillCooltime = data.skillCooltime;
     }
 }
 
 namespace BattleEntites
 {
-    public class Zero : BattleEntity
+    public class Warrior : BattleEntity
     {
         public override void Skill()
         {
             BaseSkill();
+            for (int i = 0; i < Managers.Object.Armys.Count; i++)
+            {
+                Managers.Object.Armys[i].SetBuff_PlusSpeed(3f,Managers.Object.Armys[i].status.currentAttackCycle * 0.25f);
+            }
         }
 
-        public Zero(BattleEntityController _controller, BattleEntityData _data)
+        public Warrior(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
             data = _data;
         }
     }
 
-    public class One : BattleEntity
+    public class Tank : BattleEntity
     {
         public override void Skill()
         {
             BaseSkill();
         }
 
-        public One(BattleEntityController _controller, BattleEntityData _data)
+        public Tank(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
             data = _data;
@@ -162,15 +168,14 @@ namespace BattleEntites
 
     }
 
-    public class Two : BattleEntity
+    public class Wizard : BattleEntity
     {
-
         public override void Skill()
         {
             BaseSkill();
         }
 
-        public Two(BattleEntityController _controller, BattleEntityData _data)
+        public Wizard(BattleEntityController _controller, BattleEntityData _data)
         {
             controller = _controller;
             data = _data;
@@ -183,6 +188,7 @@ namespace BattleEntites
         public override void Skill()
         {
             BaseSkill();
+            Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
         public Three(BattleEntityController _controller, BattleEntityData _data)
@@ -198,6 +204,7 @@ namespace BattleEntites
         public override void Skill()
         {
             BaseSkill();
+            Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
         public Four (BattleEntityController _controller, BattleEntityData _data)
@@ -213,6 +220,7 @@ namespace BattleEntites
         public override void Skill()
         {
             BaseSkill();
+            Managers.Battle.AttackCalculation(controller.status.attackForce * 3, controller.attackTarget, (_damage) => { controller.mvpPoint += _damage; });
         }
 
         public Five(BattleEntityController _controller, BattleEntityData _data)
