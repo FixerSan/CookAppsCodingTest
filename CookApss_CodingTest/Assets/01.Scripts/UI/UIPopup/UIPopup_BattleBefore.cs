@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class UIPopup_BattleBefore : UIPopup
@@ -21,6 +22,38 @@ public class UIPopup_BattleBefore : UIPopup
         BindEvent(GetButton((int)Buttons.Button_Clear).gameObject, Managers.Game.battleInfo.UnUseAllBattleEntity );
         BindEvent(GetButton((int)Buttons.Button_ClosePopup).gameObject, () => { Managers.UI.ClosePopupUI(this); });
         BindEvent(GetButton((int)Buttons.Button_Start).gameObject, () => { CheckStart(); });
+
+        BindEvent(GetImage((int)Images.Image_ArmyBattleEntitySpace_Front).gameObject, _dropCallback: (_callback) => 
+        {
+            GameObject dropGameObjet = _callback.pointerDrag;
+            BattleEntityData data = dropGameObjet.GetComponent<UISlot_UseBattleEntity>().data;
+            Managers.Game.battleInfo.UnUseBattleEntity(data);
+            Managers.Game.battleInfo.UseBattleEntity(data, Define.PlaceType.Front);
+            Managers.Resource.Destroy(dropGameObjet);
+        } , _type: Define.UIEventType.Drop);
+
+        BindEvent(GetImage((int)Images.Image_ArmyBattleEntitySpace_Center).gameObject, _dropCallback: (_callback) =>
+        {
+            GameObject dropGameObjet = _callback.pointerDrag;
+            BattleEntityData data = dropGameObjet.GetComponent<UISlot_UseBattleEntity>().data;
+            Managers.Game.battleInfo.UnUseBattleEntity(data);
+            Managers.Game.battleInfo.UseBattleEntity(data, Define.PlaceType.Center);
+            Managers.Resource.Destroy(dropGameObjet);
+        }, _type: Define.UIEventType.Drop);
+
+        BindEvent(GetImage((int)Images.Image_ArmyBattleEntitySpace_Rear).gameObject, _dropCallback: (_callback) =>
+        {
+            GameObject dropGameObjet = _callback.pointerDrag;
+            BattleEntityData data = dropGameObjet.GetComponent<UISlot_UseBattleEntity>().data;
+            Managers.Game.battleInfo.UnUseBattleEntity(data);
+            Managers.Game.battleInfo.UseBattleEntity(data, Define.PlaceType.Rear);
+            Managers.Resource.Destroy(dropGameObjet);
+        }, _type: Define.UIEventType.Drop);
+
+
+
+
+
 
         for (int i = 0; i < Managers.Data.playerData.hasEntites.Count; i++)
             CreateCanUseSlot(Managers.Data.playerData.hasEntites[i].UID, Managers.Data.playerData.hasEntites[i].level);

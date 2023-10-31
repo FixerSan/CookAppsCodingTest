@@ -109,6 +109,46 @@ public class BattleInfo
 
         return false;
     }
+
+    public bool UseBattleEntity(BattleEntityData _data, PlaceType _type)
+    {
+        if (nowUseBattleEntityCount == isCanUseBattleEntityCount) return false;
+        nowUseBattleEntityCount++;
+
+        int nullIndex = 0;
+        switch (_type)
+        {
+            case PlaceType.Front:
+                nullIndex = armyFront.FindEmptyArrayIndex();
+                if (nullIndex != -1) 
+                {
+                    armyFront[nullIndex] = _data;
+                    SetArmyBattleForceValue();                
+                }
+                return true;
+
+            case PlaceType.Center:
+                nullIndex = armyCenter.FindEmptyArrayIndex();
+                if (nullIndex != -1)
+                {
+                    armyCenter[nullIndex] = _data;
+                    SetArmyBattleForceValue();
+                }
+                return true;
+
+            case PlaceType.Rear:
+                nullIndex = armyRear.FindEmptyArrayIndex();
+                if (nullIndex != -1)
+                {
+                    armyRear[nullIndex] = _data;
+                    SetArmyBattleForceValue();
+                }
+                return true;
+        }
+
+        return false;
+    }
+
     public void UnUseBattleEntity(BattleEntityData _data)
     {
         nowUseBattleEntityCount--;

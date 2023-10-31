@@ -73,6 +73,7 @@ public class Define
         BeginDrag,
         Drag,
         EndDrag,
+        Drop
     }
 
     public enum SpeakerType
@@ -95,5 +96,10 @@ public class Define
     public enum TextType
     {
         Damage, Heal, Normal
+    }
+
+    public enum PlaceType
+    {
+        Front, Center, Rear
     }
 }

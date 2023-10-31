@@ -19,9 +19,9 @@ public static class Extension
         return Util.GetOrAddComponent<T>(_transform);
     }
 
-    public static void BindEvent(this GameObject _go, Action _eventCallback = null, Action<BaseEventData> _dragEventCallback = null, Define.UIEventType _eventType = Define.UIEventType.Click)
+    public static void BindEvent(this GameObject _go, Action _eventCallback = null, Action<BaseEventData> _dragEventCallback = null, Action<BaseEventData> _dropEventCallback = null, Define.UIEventType _eventType = Define.UIEventType.Click)
     {
-        UIBase.BindEvent(_go, _eventCallback, _dragEventCallback, _eventType);
+        UIBase.BindEvent(_go, _eventCallback, _dragEventCallback, _dropEventCallback, _eventType);
     }
     #endregion
     #region Array and List

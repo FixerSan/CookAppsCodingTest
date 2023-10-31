@@ -69,7 +69,7 @@ public abstract class UIBase : MonoBehaviour
     protected Toggle GetToggle(int _index) { return Get<Toggle>(_index); }
     protected Slider GetSlider(int _index) { return Get<Slider>(_index); }
 
-    public static void BindEvent(GameObject _go, Action _callback = null, Action<PointerEventData> _dracCallback = null,Define.UIEventType _type = Define.UIEventType.Click)
+    public static void BindEvent(GameObject _go, Action _callback = null, Action<PointerEventData> _dracCallback = null, Action<PointerEventData> _dropCallback = null, Define.UIEventType _type = Define.UIEventType.Click)
     {
         UIEventHandler eventHandler = _go.GetOrAddComponent<UIEventHandler>();
 
@@ -103,11 +103,16 @@ public abstract class UIBase : MonoBehaviour
             case Define.UIEventType.Drag:
                 eventHandler.OnDragHandler -= _dracCallback;
                 eventHandler.OnDragHandler += _dracCallback;
-
                 break;
+
             case Define.UIEventType.EndDrag:
                 eventHandler.OnEndDragHandler -= _dracCallback;
                 eventHandler.OnEndDragHandler += _dracCallback;
+                break;
+
+            case Define.UIEventType.Drop:
+                eventHandler.OnDropHandler -= _dropCallback;
+                eventHandler.OnDropHandler += _dropCallback;
                 break;
         }
     }
