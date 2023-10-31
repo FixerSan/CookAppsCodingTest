@@ -6,7 +6,7 @@ using static Define;
 
 public class ObjectManager
 {
-    private Transform entityTrans;
+    // 전체 스폰 위치
     public Transform EntityTrans
     {
         get
@@ -21,8 +21,9 @@ public class ObjectManager
             return entityTrans;
         }
     }
+    private Transform entityTrans;
 
-    private Transform armyBattleEntityTrnas;
+    // 아군 스폰 위치
     public Transform ArmyBattleEntityTrnas
     {
         get
@@ -40,9 +41,12 @@ public class ObjectManager
             return armyBattleEntityTrnas;
         }
     }
-    public List<BattleEntityController> Enemys { get; } = new List<BattleEntityController>();
+    private Transform armyBattleEntityTrnas;
 
-    private Transform enemyBattleEntityTrnas;
+    //스폰된 아군 위치
+    public List<BattleEntityController> Armys { get; } = new List<BattleEntityController>();
+    
+    //적 스폰 위치
     public Transform EnemyBattleEntityTrnas
     {
         get
@@ -60,16 +64,24 @@ public class ObjectManager
             return enemyBattleEntityTrnas;
         }
     }
-    public List<BattleEntityController> Armys { get; } = new List<BattleEntityController>();
+    private Transform enemyBattleEntityTrnas;
 
+    // 스폰된 적들 위치
+    public List<BattleEntityController> Enemys { get; } = new List<BattleEntityController>();
+
+    //아군 전투 오브젝트 생성 후 초기화
     public BattleEntityController SpawnArmyBattleEntity(Define.BattleEntity _entity, int _level,Vector2 _position = new Vector2())
     {
+        //전투 오브젝트 공통 요소 생성
+
         BattleEntityController battleEntityController = Managers.Resource.Instantiate($"{_entity.ToString()}", _parent: ArmyBattleEntityTrnas).GetOrAddComponent<BattleEntityController>();
         battleEntityController.transform.position = _position;
         BattleEntity battleEntity = null;
         BattleEntityStatus status = null;
         BattleEntityData data = null;
         Dictionary<Define.BattleEntityState, State<BattleEntityController>> states = new Dictionary<BattleEntityState, State<BattleEntityController>>();
+
+        //각 전투 오브젝트의 요소 생성
         switch (_entity)
         {
             case Define.BattleEntity.Warrior:
@@ -149,8 +161,9 @@ public class ObjectManager
                 battleEntity = new BattleEntites.Five(battleEntityController, data);
                 break;
         }
-        status = new BattleEntityStatus(battleEntityController, data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed, data.attackCycle);
 
+        //조합 및 초기화
+        status = new BattleEntityStatus(battleEntityController, data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed, data.attackCycle);
         if (battleEntityController != null)
         {
             battleEntityController.Init(battleEntity, states, status, BattleEntityType.Army);
@@ -158,18 +171,23 @@ public class ObjectManager
             return battleEntityController;        
         }
 
+        //실패시 디버그
         Debug.Log("스폰을 실패하였습니다.");
         return null;
     }
 
+    //적 전투 오브젝트 생성 후 초기화
     public BattleEntityController SpawnEnemyBattleEntity(Define.BattleEntity _entity, int _level, Vector2 _position = new Vector2())
     {
+        //전투 오브젝트 공통 요소 생성
         BattleEntityController battleEntityController = Managers.Resource.Instantiate($"{_entity.ToString()}", _parent: EnemyBattleEntityTrnas).GetOrAddComponent<BattleEntityController>();
         battleEntityController.transform.position = _position;
         BattleEntity battleEntity = null;
         BattleEntityStatus status = null;
         BattleEntityData data = null;
         Dictionary<Define.BattleEntityState, State<BattleEntityController>> states = new Dictionary<BattleEntityState, State<BattleEntityController>>();
+
+        //각 전투 오브젝트의 요소 생성
         switch (_entity)
         {
             case Define.BattleEntity.Warrior:
@@ -249,9 +267,9 @@ public class ObjectManager
                 battleEntity = new BattleEntites.Five(battleEntityController, data);
                 break;
         }
+
+        //조합 및 초기화
         status = new BattleEntityStatus(battleEntityController,data.maxHP, data.maxHP, data.attackForce, data.skillCooltime, data.skillCooltime, data.moveSpeed, data.attackCycle);
-
-
         if (battleEntityController != null)
         {
             battleEntityController.Init(battleEntity, states, status, BattleEntityType.Enemy);
@@ -259,6 +277,7 @@ public class ObjectManager
             return battleEntityController;
         }
 
+        //실패시 디버그
         Debug.Log("스폰을 실패하였습니다.");
         return null;
     }

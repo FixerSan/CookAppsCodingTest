@@ -17,8 +17,8 @@ public class UISlot_CanUseBattleEntity : UIBase
         BindText(typeof(Texts));
         BindObject(typeof(Objects));
 
-        Get<GameObject>((int)Objects.Bundle_Used).gameObject.SetActive(false);
-        Get<Image>((int)Images.Image_Illust).sprite = Managers.Resource.Load<Sprite>(data.name);
+        GetObject((int)Objects.Bundle_Used).gameObject.SetActive(false);
+        Managers.Resource.Load<Sprite>(data.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
         GetText((int)Texts.Text_Level).text = $"Lv.{data.level}";
         BindEvent(GetButton((int)Buttons.Slot_CanUseBattleEntity).gameObject, UseBattleEntity) ;
     }

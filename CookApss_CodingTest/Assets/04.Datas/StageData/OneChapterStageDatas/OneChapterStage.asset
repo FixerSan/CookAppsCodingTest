@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: OneChapterStage
   m_EditorClassIdentifier: 
   normal:
-  - {fileID: 11400000, guid: 7c708bbc6789d1345a1ba65162d1116c, type: 2}
+  - {fileID: 11400000, guid: 3f01d231dddcaa549a5f11c9f28bdcb7, type: 2}
   - {fileID: 11400000, guid: 13310e6fd94253844bd66faf3b429a3e, type: 2}
   hard: []

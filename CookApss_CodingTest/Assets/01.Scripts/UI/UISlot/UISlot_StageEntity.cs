@@ -10,7 +10,7 @@ public class UISlot_StageEntity : UIBase
         controller = _controller;
         BindImage(typeof(Images));
         BindText(typeof(Texts));
-
+        Managers.Resource.Load<Sprite>(controller.entity.data.name, (_sprite) => { GetImage((int)Images.Image_Illust).sprite = _sprite; });
         BindEvent(GetImage((int)Images.Image_Illust).gameObject, UseSkill);
     }
     public void FixedUpdate()
@@ -44,6 +44,7 @@ public class UISlot_StageEntity : UIBase
             GetText((int)Texts.Text_Cooltime).gameObject.SetActive(false);
             GetImage((int)Images.Image_Cooltime).gameObject.SetActive(false);
         }
+
         else 
         {
             if (!GetImage((int)Images.Image_Cooltime).gameObject.activeSelf)

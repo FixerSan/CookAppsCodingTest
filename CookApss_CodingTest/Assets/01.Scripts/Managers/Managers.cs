@@ -36,18 +36,22 @@ public class Managers : Singleton<Managers>
 
     public static GameManager Game { get { return Instance?.game; } }
     public static CoroutineManager Routine { get { return Instance.routine; } }
+    
 
+    //어플이 실행 되면 초기화
     [RuntimeInitializeOnLoadMethod]
     public static void CreateManager()
     {
         Instance.Init();
     }
 
+    //Scene의 오브젝트에 의해 매니저가 호출되어 생성되었을 시 초기화가 되게 하기 위해서
     public void Awake()
     {
         Init();
     }
 
+    //초기화
     public void Init()
     {
         if (isInit) return;
@@ -55,6 +59,7 @@ public class Managers : Singleton<Managers>
         Instance.CreateManagers();
     }
 
+    //각 매니저들 생성
     private void CreateManagers()
     {
         resource = new ResourceManager(); 

@@ -7,8 +7,10 @@ using Object = UnityEngine.Object;
 
 public class ResourceManager 
 {
+    //로드된 오브젝트들을 담아놓는 딕셔너리
     private Dictionary<string, Object> resourceDictionary = new Dictionary<string, Object>();
 
+    //콜백 로드 호출
     public void Load<T>(string _key, Action<T> _callback = null) where T : Object
     {
         T ob = CheckLoaded<T>(_key);
@@ -25,6 +27,7 @@ public class ResourceManager
         });
     }
 
+    //로드 호출
     public T Load<T>(string _key) where T:Object
     {
         return CheckLoaded<T>(_key);
@@ -63,6 +66,7 @@ public class ResourceManager
         return null;
     }
 
+    //비동기 로드
     private void LoadAsync<T>(string _key, Action<T> _callback = null) where T : Object
     {
         string loadKey = ChangeKey<T>(_key);
@@ -76,6 +80,7 @@ public class ResourceManager
         };
     }
 
+    //오브젝트 생성
     public GameObject Instantiate(string _key, Transform _parent = null, bool _pooling = false)
     {
         GameObject prefab = CheckLoaded<GameObject>($"{_key}");
@@ -97,7 +102,7 @@ public class ResourceManager
         go.name = prefab.name;
         return go;
     }
-
+    // 오브젝트 파괴
     public void Destroy(GameObject _go)
     {
         if (_go == null) return;
@@ -106,6 +111,7 @@ public class ResourceManager
         Object.Destroy(_go);
     }
 
+    //로드 키 변환
     private string ChangeKey<T>(string _key) where T : Object
     {
         if (typeof(T) == typeof(TextAsset)) _key = _key + ".Data";

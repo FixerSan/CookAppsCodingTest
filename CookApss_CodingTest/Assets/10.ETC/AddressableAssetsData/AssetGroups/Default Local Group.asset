@@ -147,6 +147,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Preload
+  - m_GUID: d0e91c29af1d22b4da8690f96c12b25a
+    m_Address: EnemyOne.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 13e1e22c1e44da94498c925bdfc7c72b
+    m_Address: EnemyThree.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 3055da878b2401441b00613edce1c530
+    m_Address: EnemyTwo.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 0e426872729105d49ba1d73a59f80c2c
+    m_Address: Tank.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 595ce024ad29f8b49ac3ae7712afa737
+    m_Address: Warrior.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+  - m_GUID: 3b2184d12c2fb2143a3be4322556c69a
+    m_Address: Wizard.Sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0a3ce9892cecf864db1d8ab456c0ed3d, type: 2}
   m_SchemaSet:

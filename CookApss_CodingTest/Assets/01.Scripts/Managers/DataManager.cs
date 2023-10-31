@@ -14,23 +14,27 @@ public class DataManager
     public Dictionary<int, StageData> stageDatas;
     public readonly string PLAYERSAVEDATA_PATH;
 
+    //플레이어 데이터 반환
     public PlayerData GetPlayerData(int _UID)
     {
         return LoadPlayerData(_UID);
     }
 
+    //스테이지 데이터 반환
     public StageData GetStageData(int _UID)
     {
         if (stageDatas.TryGetValue(_UID, out StageData _data)) return _data;
         return null;
     }
 
+    //다이얼로그 데이터 반환
     public DialogData GetDialogData(int _UID)
     {
         if (dialogDatas.TryGetValue(_UID, out DialogData _data)) return _data;
         return null;
     }
 
+    //엔티티 데이터 반환
     public BattleEntityData GetBattleEntityData(int _UID, int _level)
     {
         if (battleEntityStatusDatas.TryGetValue(_UID, out Dictionary<int, BattleEntityData> datas)) if (datas.TryGetValue(_level, out BattleEntityData data)) return data;
@@ -38,6 +42,7 @@ public class DataManager
 
     }
 
+    //게임 기반 데이터 로드
     public void LoadPreData(Action _callback)
     {
         GetPlayerData(Define.userUID);
@@ -47,6 +52,7 @@ public class DataManager
         _callback?.Invoke();
     }
 
+    //플레이어 데이터 로드
     private PlayerData LoadPlayerData(int _UID)
     {
         if(playerData == null)
@@ -70,6 +76,7 @@ public class DataManager
         return playerData;
     }
 
+    //배틀 엔티티 스텟 데이터 로드
     public void LoadBattleEntityStatusData()
     {
         TextAsset textAsset = Managers.Resource.Load<TextAsset>("BattleEntityData");
@@ -91,6 +98,7 @@ public class DataManager
         }
     }
 
+    //스테이지 데이터 로드
     public void LoadStageData()
     {
         StageDatas datas = Managers.Resource.Load<StageDatas>("OneChapterStageData.Data");
@@ -101,6 +109,7 @@ public class DataManager
             stageDatas.Add(datas.hard[i].UID, datas.hard[i]);
     }
 
+    //플레이어 데이터 저장
     public void SavePlayerData(PlayerData _playerData)
     {
         string hasEntityUIDs = string.Empty;

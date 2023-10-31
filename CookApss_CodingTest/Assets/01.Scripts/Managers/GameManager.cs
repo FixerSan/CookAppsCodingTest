@@ -7,6 +7,7 @@ using static Define;
 
 public class GameManager : Singleton<GameManager>
 {
+    //현재 게임 데이터 및 상태
     public GameState state;
     public BattleInfo battleInfo;
 
@@ -21,14 +22,19 @@ public class GameManager : Singleton<GameManager>
             });
         });
     }
+
+    //게임 시작
     public void StartGame(Action _callback)
     {
         Managers.Data.LoadPreData(() => { Managers.Scene.LoadScene(Define.Scene.Main); _callback?.Invoke(); });
     }
+
+    //게임 저장
     public void SaveGame()
     {
         Managers.Data.SavePlayerData(Managers.Data.playerData);
     }
+
     private void Update()
     {
         if(battleInfo != null)
@@ -45,44 +51,53 @@ public class GameManager : Singleton<GameManager>
 [System.Serializable]
 public class BattleInfo
 {
+    //현재 진행중인 스테이지 데이터
     public StageData currentStage;
+    public int clearStar;
 
+    //현재 진행중인 스테이지의 배치된 플레이어 entity  및 위치
     public BattleEntityData[] armyFront;
     public BattleEntityData[] armyCenter;
     public BattleEntityData[] armyRear;
 
+    //현재 진행중인 스테이지중 플레이어의 상태
     public int isCanUseBattleEntityCount;
     public int nowUseBattleEntityCount;
     public int armyCurrentHP;
     public int armyMaxHP;
     public int armyAttackForce;
     public int armybattleForce;
+    public int allBattlePoint;
 
+    //데미지의 맞춰 정렬된 플레이어 엔티티들
+    public List<BattleEntityController> battleMVPPoints;
+
+    //현재 진행중인 스테이지의 배치된 적 entity  및 위치
     public BattleEntityData[] enemyFront;
     public BattleEntityData[] enemyCenter;
     public BattleEntityData[] enemyRear;
 
+    //현재 진행중인 스테이지중 적의 상태
     public int nowEnemyCount;
     public int enemyCurrentHP;
     public int enemyMaxHP;
     public int enemyAttackForce;
     public int enemybattleForce;
 
-    public Dictionary<string, int> specialties;
+    //게임 진행 설정 및 정보
     public bool isAutoSkill;
     public bool isFastSpeed;
     public float time;
 
-    public List<BattleEntityController> battleMVPPoints;
-    public int allBattlePoint;
 
-    public int clearStar;
-
+    //플레이어 엔티티 배치
     public bool UseBattleEntity(BattleEntityData _data)
     {
+        //더 배치할 수 있는지 체크
         if (nowUseBattleEntityCount == isCanUseBattleEntityCount) return false;
         nowUseBattleEntityCount++;
 
+        //비어있는 배열 체크 및 적용
         int nullIndex = armyFront.FindEmptyArrayIndex();
         if (nullIndex != -1)
         {
@@ -107,9 +122,11 @@ public class BattleInfo
             return true;
         }
 
+        //비어있는 배열이 없을 시 False 반환
         return false;
     }
 
+    //지정된 위치에 플레이어 엔티티 배치
     public bool UseBattleEntity(BattleEntityData _data, PlaceType _type)
     {
         if (nowUseBattleEntityCount == isCanUseBattleEntityCount) return false;
@@ -149,9 +166,13 @@ public class BattleInfo
         return false;
     }
 
+    //플레이어 배치 취소 
     public void UnUseBattleEntity(BattleEntityData _data)
     {
+        //배치 카운트 감소
         nowUseBattleEntityCount--;
+
+        //각 배치 검사 후 그 배치에 있으면 배치 취소
         for (int i = 0; i < armyFront.Length; i++)
         {
             if (armyFront[i] == _data)
@@ -182,6 +203,8 @@ public class BattleInfo
             }
         }
     }
+
+    //플레이어 배치 초기화
     public void UnUseAllBattleEntity()
     {
         armyFront = new BattleEntityData[3];
@@ -193,12 +216,16 @@ public class BattleInfo
 
         UpdateUI();
     }
+
+    //배틀 포인트 정리
     private void SetArmyBattleForceValue()
     {
-        //개인 특성을 추가 한다면 여기에 기능 추가
+        //토탈 변수 초기화
         armyAttackForce = 0;
         armyMaxHP = 0;
         armybattleForce = 0;
+
+        //각 배치에 오브젝트가 있는지 체크 후 있다면 각 토탈변수에 적립
         for (int i = 0; i < armyFront.Length; i++)
         {
             if (armyFront[i] != null)
@@ -226,9 +253,15 @@ public class BattleInfo
             }
         }
 
+        //배틀 포인트 계산
         armybattleForce = armyAttackForce + armyMaxHP;
         UpdateUI();
     }
+
+    /// <summary>
+    /// World맵에서 스테이지 선택시 호출됨
+    /// </summary>
+    /// <param name="_UID">스테이지 데이터 인덱스</param>
     public void SetStageData(int _UID)
     {
         currentStage = Managers.Data.GetStageData(_UID);
@@ -240,6 +273,7 @@ public class BattleInfo
         time = 60;
 
         enemyFront = new BattleEntityData[3];
+
         for (int i = 0; i < currentStage.frontEnemyUIDs.Length; i++)
         {
             BattleEntityData data = Managers.Data.GetBattleEntityData(currentStage.frontEnemyUIDs[i], currentStage.frontEnemyLevels[i]);
@@ -271,6 +305,8 @@ public class BattleInfo
 
         enemybattleForce = enemyMaxHP + enemyAttackForce;
     }
+
+    //스테이지가 시작됄 시 초기화
     public void StartStage()
     {
         clearStar = 0;
@@ -283,6 +319,8 @@ public class BattleInfo
         battleMVPPoints = Managers.Object.Armys;
         UpdateUI();
     }   
+
+    //MVP포인트가 변경될 시 초기화 및 높은 포인트 순으로 배열 정렬
     public void UpdateMVPPoints()
     {
         List<BattleEntityController> tempList = new List<BattleEntityController>();
@@ -316,32 +354,44 @@ public class BattleInfo
 
         UpdateUI();
     }
+
+    //팀 체력이 달았을 시 초기화
     public void UpdateTeamHP(VoidEventType _type)
     {
         if (_type != VoidEventType.OnChangeControllerStatus) return;
         if (Managers.Game.state != GameState.BattleProgress) return;
         armyCurrentHP = 0;
         enemyCurrentHP = 0;
+
+        
         foreach (var item in Managers.Object.Armys)
             armyCurrentHP += item.status.CurrentHP;
         foreach (var item in Managers.Object.Enemys)
             enemyCurrentHP += item.status.CurrentHP;
         UpdateUI();
     }
+
+    //게임 스피드 상태 변경 및 처리
     public void ChangeFastSpeed()
     {
         isFastSpeed = !isFastSpeed;
         if (isFastSpeed) Time.timeScale = 1.5f;
         else Time.timeScale = 1.0f;
     }
+
+    //오토 스킬 상태 변경
     public void ChangeAutoSkill()
     {
         isAutoSkill = !isAutoSkill;
     }
+
+    //UI 업데이트 이벤트 호출
     public void UpdateUI()
     {
         Managers.Event.OnVoidEvent?.Invoke(VoidEventType.OnChangeBattleInfo);
     }
+
+    //스테이지가 진행중일 때 시간 감소 처리 및 상태 변경
     public void CheckTime()
     {
         if (Managers.Game.state == GameState.BattleProgress)
@@ -355,19 +405,25 @@ public class BattleInfo
             }
         }
     }
+
+    //승리 처리
     public void Victory()
     {
         Managers.Game.state = Define.GameState.BattleAfter;
         Managers.Routine.StartCoroutine(VictoryRoutine());
     }
+
+    //패배 처리
     public void Lose()
     {
         Managers.Game.state = Define.GameState.BattleAfter;
         Managers.Routine.StartCoroutine(LoseRoutine());
     }
 
+    //공통된 종료 처리
     private void BaseEndStage()
     {
+        //값 초기화
         armyFront = new BattleEntityData[3];
         armyCenter = new BattleEntityData[3];
         armyRear = new BattleEntityData[3];
@@ -377,6 +433,8 @@ public class BattleInfo
         armyAttackForce = 0;
         armybattleForce = 0;
         Time.timeScale = 1.0f;
+
+        //각 오브젝트들 삭제
         for (int i = 0; i < Managers.Object.Armys.Count; i++)
         {
             Managers.Object.Armys[i].StopAllRoutine();
@@ -393,11 +451,14 @@ public class BattleInfo
         Managers.Object.Enemys.Clear();
     }
 
+    //승리 처리 부분
     private IEnumerator VictoryRoutine()
     {
+        //남아있는 오브젝트 승리 포즈
         for (int i = 0; i < Managers.Object.Armys.Count; i++)
             Managers.Object.Armys[i].ChangeState(BattleEntityState.EndBattle);
 
+        //승리 처리 및 UI 호출
         yield return new WaitForSeconds(2);
         Managers.Screen.FadeIn(0.5f, () =>
         {
@@ -420,10 +481,15 @@ public class BattleInfo
         });
     }
 
+
+    //승리 처리 부분
     private IEnumerator LoseRoutine()
     {
+        //적 오브젝트 승리 포즈
         for (int i = 0; i < Managers.Object.Enemys.Count; i++)
             Managers.Object.Enemys[i].ChangeState(BattleEntityState.EndBattle);
+
+        //패배 처리 및 UI 호출
         yield return new WaitForSeconds(2);
         Managers.Screen.FadeIn(0.5f, () =>
         {
@@ -433,10 +499,12 @@ public class BattleInfo
         });
     }
 
+    //타임 오버시 패배 처리
     public void TimeOver()
     {
-
+        Lose();
     }
+
     public void Update()
     {
         CheckTime();
@@ -453,7 +521,6 @@ public class BattleInfo
         enemyFront = new BattleEntityData[3];
 
         isCanUseBattleEntityCount = 4;
-        specialties = new Dictionary<string, int>();
         battleMVPPoints = new List<BattleEntityController>();
         isAutoSkill = false;
         isFastSpeed = false;

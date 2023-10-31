@@ -25,6 +25,8 @@ public class UISlot_UseBattleEntity : UIBase
         slotDragTransform = Util.FindChild(Managers.UI.Root.gameObject, "Bundle_ArmyBattleEntitySpaces", true).transform;
 
 
+        Managers.Resource.Load<Sprite>(data.name, (_sprite) => { GetImage((int)Images.Slot_UseBattleEntity).sprite = _sprite; });
+
         GetText((int)Texts.Text_NameAndLevel).text = $"{_data.name} Lv.{_data.level}";
         if (_type == SlotType.Enemy)
         {
@@ -33,6 +35,7 @@ public class UISlot_UseBattleEntity : UIBase
             GetText((int)Texts.Text_NameAndLevel).transform.eulerAngles = new Vector3(0, 0, 0);
             return;
         }
+
         BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, RemoveSlot);
         BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, _dracCallback: EndDrag, _type:Define.UIEventType.EndDrag);
         BindEvent(GetButton((int)Buttons.Slot_UseBattleEntity).gameObject, _dracCallback: (_) => { if (slotType == SlotType.Enemy) return; DragMove(_); }, _type:Define.UIEventType.Drag);
@@ -72,7 +75,7 @@ public class UISlot_UseBattleEntity : UIBase
 
     private enum Images
     {
-
+        Slot_UseBattleEntity
     }
 
     private enum Texts

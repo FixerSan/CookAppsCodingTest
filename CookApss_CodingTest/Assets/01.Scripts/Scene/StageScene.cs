@@ -46,7 +46,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyFront_OneOrThree_Spawn.ToString()].GetChild(1).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyFront_OneOrThree_Stop.ToString()].GetChild(1));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyFront_OneOrThree_Stop.ToString()].GetChild(1));
             }
         }
 
@@ -55,7 +55,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyFront_Two_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyFront_Two_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyFront_Two_Stop.ToString()].GetChild(i));
             }
         }
 
@@ -64,7 +64,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyFront_OneOrThree_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyFront_OneOrThree_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyFront_OneOrThree_Stop.ToString()].GetChild(i));
             }
         }
         #endregion
@@ -82,7 +82,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyCenter_OneOrThree_Spawn.ToString()].GetChild(1).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyCenter_OneOrThree_Stop.ToString()].GetChild(1));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyCenter_OneOrThree_Stop.ToString()].GetChild(1));
             }
         }
 
@@ -91,7 +91,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyCenter_Two_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyCenter_Two_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyCenter_Two_Stop.ToString()].GetChild(i));
             }
         }
 
@@ -100,7 +100,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyCenter_OneOrThree_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyCenter_OneOrThree_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyCenter_OneOrThree_Stop.ToString()].GetChild(i));
             }
         }
         #endregion
@@ -118,7 +118,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyRear_OneOrThree_Spawn.ToString()].GetChild(1).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyRear_OneOrThree_Stop.ToString()].GetChild(1));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyRear_OneOrThree_Stop.ToString()].GetChild(1));
             }
         }
 
@@ -127,7 +127,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyRear_Two_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyRear_Two_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyRear_Two_Stop.ToString()].GetChild(i));
             }
         }
 
@@ -136,7 +136,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_ArmyRear_OneOrThree_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_ArmyRear_OneOrThree_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_ArmyRear_OneOrThree_Stop.ToString()].GetChild(i));
             }
         }
         #endregion
@@ -156,7 +156,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyFront_OneOrThree_Spawn.ToString()].GetChild(1).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyFront_OneOrThree_Stop.ToString()].GetChild(1));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyFront_OneOrThree_Stop.ToString()].GetChild(1));
             }
         }
 
@@ -165,7 +165,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyFront_Two_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyFront_Two_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyFront_Two_Stop.ToString()].GetChild(i));
             }
         }
 
@@ -174,7 +174,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyFront_OneOrThree_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyFront_OneOrThree_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyFront_OneOrThree_Stop.ToString()].GetChild(i));
             }
         }
         #endregion
@@ -192,7 +192,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyCenter_OneOrThree_Spawn.ToString()].GetChild(1).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyCenter_OneOrThree_Stop.ToString()].GetChild(1));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyCenter_OneOrThree_Stop.ToString()].GetChild(1));
             }
         }
 
@@ -201,7 +201,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyCenter_Two_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyCenter_Two_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyCenter_Two_Stop.ToString()].GetChild(i));
             }
         }
 
@@ -210,7 +210,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyCenter_OneOrThree_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyCenter_OneOrThree_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyCenter_OneOrThree_Stop.ToString()].GetChild(i));
             }
         }
         #endregion
@@ -228,7 +228,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyRear_OneOrThree_Spawn.ToString()].GetChild(1).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyRear_OneOrThree_Stop.ToString()].GetChild(1));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyRear_OneOrThree_Stop.ToString()].GetChild(1));
             }
         }
 
@@ -237,7 +237,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyRear_Two_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyRear_Two_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyRear_Two_Stop.ToString()].GetChild(i));
             }
         }
 
@@ -246,7 +246,7 @@ public class StageScene : BaseScene
             for (int i = 0; i < becs.Count; i++)
             {
                 becs[i].transform.position = poses[Trans.Trans_EnemyRear_OneOrThree_Spawn.ToString()].GetChild(i).position;
-                becs[i].SetTarget(poses[Trans.Trans_EnemyRear_OneOrThree_Stop.ToString()].GetChild(i));
+                becs[i].SetMoveTarget(poses[Trans.Trans_EnemyRear_OneOrThree_Stop.ToString()].GetChild(i));
             }
         }
         #endregion

@@ -8,6 +8,7 @@ public class UIPopup_WorldText : UIBase
     public float fadeTime;
     public void Init(string _description , Vector2 _position, Define.TextType _type)
     {
+        Managers.UI.SetCanvas(gameObject, _isToast: true);
         BindText(typeof(Texts));
         GetText((int)Texts.Text_Damage).text = _description;
         GetText((int)Texts.Text_Damage).transform.position = Camera.main.WorldToScreenPoint(_position);
